@@ -15,6 +15,13 @@
   - Slide: [ARM-X: The ARM IoT Firmware Emulation Framework](https://cyberweek.ae/materials/2019/D4%20TRACK%201%20-%20Introducing%20ARM-X%20%E2%80%93%20The%20ARM%20IoT%20Firmware%20Emulation%20Framework%20-%20Saumil%20Shah.pdf)
   - Youtube: [Introducing ARM-X: The ARM IoT Firmware Emulation Framework - Saumil Shah](https://www.youtube.com/watch?v=NVl6uJiEaoI)
 
+## Papers
+
+- [Frankenstein: Advanced Wireless Fuzzing to Exploit New Bluetooth Escalation Targets](https://www.usenix.org/conference/usenixsecurity20/presentation/ruge)
+- [Jetset: Targeted Firmware Rehosting for Embedded Systems](https://www.usenix.org/system/files/sec21fall-johnson.pdf)
+- [DICE: Automatic Emulation of DMA Input Channels for Dynamic Firmware Analysis](https://arxiv.org/pdf/2007.01502.pdf)
+- [PASAN: Detecting Peripheral Access Concurrency Bugs within Bare-Metal Embedded Applications](https://www.usenix.org/conference/usenixsecurity21/presentation/kim)
+
 ## Slides
 
 - [Backdooring hardware devices by injecting malicious payloads on microcontrollers](https://media.defcon.org/DEF%20CON%2027/DEF%20CON%2027%20presentations/DEFCON-27-Sheila-A-Berta-Backdooring-hardware-devices-by-injecting-malicious-payloads-on-Microcontrollers.pdf)

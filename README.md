@@ -15,6 +15,19 @@
   - Slide: [ARM-X: The ARM IoT Firmware Emulation Framework](https://cyberweek.ae/materials/2019/D4%20TRACK%201%20-%20Introducing%20ARM-X%20%E2%80%93%20The%20ARM%20IoT%20Firmware%20Emulation%20Framework%20-%20Saumil%20Shah.pdf)
   - Youtube: [Introducing ARM-X: The ARM IoT Firmware Emulation Framework - Saumil Shah](https://www.youtube.com/watch?v=NVl6uJiEaoI)
 
+## Projects
+
+- [ArduPilot](https://github.com/ArduPilot/ardupilot) is the most advanced, full-featured and reliable open source autopilot software available.
+- [RIOT](https://github.com/RIOT-OS/RIOT)  is a real-time multi-threading operating system that supports a range of devices that are typically found in the IoT.
+- [Contiki](https://github.com/contiki-os/contiki)  is an open source operating system that runs on tiny low-power microcontrollers.
+- [Contiki-NG](https://github.com/contiki-ng/contiki-ng)  is an open-source, cross-platform operating system for Next-Generation IoT devices.
+- [IronOS](https://github.com/Ralim/IronOS)  Open Source Soldering Iron firmware for Miniware and Pinecil.
+- [rusEFI](https://github.com/rusefi/rusefi) GPL internal combustion engine control unit
+- [EmuFlight](https://github.com/emuflight/EmuFlight) is flight controller software (firmware) used to fly multi-rotor craft.
+- [BetaFlight](https://github.com/betaflight/betaflight) Open Source Flight Controller Firmware
+- [FreeRTOS](https://github.com/FreeRTOS/FreeRTOS-Kernel) Real-time operating system for microcontrollers.
+- [RaceFlight](https://github.com/rs2k/raceflight)  Race prepared version of the cleanflight flight-controller
+
 ## Papers
 
 - [Frankenstein: Advanced Wireless Fuzzing to Exploit New Bluetooth Escalation Targets](https://www.usenix.org/conference/usenixsecurity20/presentation/ruge)

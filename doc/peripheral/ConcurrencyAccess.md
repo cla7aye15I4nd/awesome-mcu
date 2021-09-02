@@ -3,7 +3,7 @@ The internal struct of peripheral is a finite state machine, an **operator** of 
 
 ## Examples
 
-### USART struct
+**USART struct:**
 
 ```c
 typedef struct
@@ -18,9 +18,9 @@ typedef struct
 } USART_TypeDef;
 ```
 
-**Write Byte**: Read `SR` (TXE), Write `DR`, Read `SR`(TC).
+**Write Byte Sequence**: Read `SR` (TXE), Write `DR`, Read `SR`(TC).
 
-**Concurrency Bugs**: 
+**Concurrency Bugs demo**: 
 
 | Task A   | Task B                                |
 | -------- | ------------------------------------- |
@@ -31,5 +31,15 @@ typedef struct
 | Read TC  |                                       |
 |          | Read TC                               |
 
-The byte of Task A is not delivered.
+After write the DR, the UART will move the DR to UART buffer (shift register), but in the process task B cover the DR, the data from Task A are lost. The byte of Task A is not delivered.
+
+## Real World Case
+
+**SPI Thread Safe**: [Implement thread safety for all SPI devices](https://github.com/RIOT-OS/RIOT/pull/2317)
+
+    To communicate with any device, the bus needs to: 
+    (i) select the slave device and 
+    (ii) read/write data from/to the device.
+    These two steps represent the internal state machines of this bus. Now imagine step (i) is done by thread A, which is going to send a command to the LIS3DH sensor. Simultaneously, thread B makes the SPI bus choose another slave device, i.e., the SD
+    card controller. In this case, thread A’s command will then be redirected to another slave device due to the transaction corruption of SPI caused by concurrent bus accesses.
 

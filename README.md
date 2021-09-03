@@ -24,8 +24,9 @@
 - [IronOS](https://github.com/Ralim/IronOS)  Open Source Soldering Iron firmware for Miniware and Pinecil.
 - [rusEFI](https://github.com/rusefi/rusefi) GPL internal combustion engine control unit
 - [EmuFlight](https://github.com/emuflight/EmuFlight) is flight controller software (firmware) used to fly multi-rotor craft.
-- [BetaFlight](https://github.com/betaflight/betaflight) Open Source Flight Controller Firmware
-- [FreeRTOS](https://github.com/FreeRTOS/FreeRTOS-Kernel) Real-time operating system for microcontrollers.
+- [BetaFlight](https://github.com/betaflight/betaflight) Open Source Flight Controller Firmware ([bug notes](doc/betaflight/bug.md))
+- [FreeRTOS](https://github.com/FreeRTOS/FreeRTOS-Kernel) Real-time operating system for microcontrollers. ([bug notes](doc/freertos/bug.md))
+  - AWS bug report: https://aws.amazon.com/cn/freertos/security-updates/
 - [RaceFlight](https://github.com/rs2k/raceflight)  Race prepared version of the cleanflight flight-controller
 
 ## Papers

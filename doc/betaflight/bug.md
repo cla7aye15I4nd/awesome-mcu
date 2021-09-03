@@ -23,3 +23,11 @@ static mspPostProcessFnPtr mspSerialProcessReceivedCommand(mspPort_t *msp, mspPr
 /* ... */
 ```
 
+## Fix STM32G474 RAM overflow
+
+https://github.com/betaflight/betaflight/pull/10720/files
+
+link script error
+
+![](../img/betaflight-pull-10720.png)
+

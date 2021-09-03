@@ -1,0 +1,17 @@
+- [ ] Figure out the principle of afl fuzzing.
+- [ ] Implement peripheral interface on Qiling 
+  - [ ] Serial peripheral interface (SPI)
+  - [ ] Inter-integrated circuit (I2C)
+  - [ ] Analog-to-digital converter (ADC)
+  - [ ] System configuration controller (SYSCFG)
+  - [ ] External interrupts (EXTI)
+- [ ] Run large programs correctly
+  - [ ] FreeRTOS
+  - [ ] BetaFlight
+  - [ ] EmuFlight
+- [ ] Add more support of board
+  - [ ] STM32F1
+  - [ ] STM32F2
+  - [ ] STM32F4
+  - [ ] STM32F7
+

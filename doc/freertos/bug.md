@@ -24,3 +24,25 @@ else
 }
 ```
 
+## Improve heap2 bounds checking
+
+- https://github.com/FreeRTOS/FreeRTOS-Kernel/commit/c7a9a01c94987082b223d3e59969ede64363da63
+- https://github.com/FreeRTOS/FreeRTOS-Kernel/pull/224
+
+There was a mostly theoretical case where an overflow could occur if the size of the requested memory block is between 4,294,967,288 and 4,294,967,296 bytes.
+
+```c
+if( xWantedSize > 0 )
+{
+	xWantedSize += heapSTRUCT_SIZE;
+// ...
+```
+
+```c
+if( ( xWantedSize > 0 ) && 
+   ( ( xWantedSize + heapSTRUCT_SIZE ) >  xWantedSize ) ) /* Overflow check */
+{
+    xWantedSize += heapSTRUCT_SIZE;
+
+```
+

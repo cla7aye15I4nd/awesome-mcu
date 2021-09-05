@@ -5,6 +5,11 @@
 ## Emulator types
 
 - Emulate peripheral hardware by software components in the emulator - *Incomplete support for peripherals, significant manual efforts*
+
+```
+Actually it is not so complex as the paper imagined, there are only few types on-chip peripherhal. Although they may perform differently in different platform, the MCU developer also face the same issue and has privoded HAL to solve such problem.
+```
+
 - Use real peripheral hardware to handle peripheral access in the emulator - *Rely on real hardware, slow, unscalable*
 - Replace peripheral-dependent firmware code with software stubs that have the same functionalities - *Unable to test peripheral-dependent code, significant manual efforts*
 

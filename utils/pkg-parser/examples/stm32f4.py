@@ -1,8 +1,8 @@
 import ctypes
 
 class STM32F4xxAdc:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -52,8 +52,8 @@ class STM32F4xxAdc:
 		]
 
 class STM32F4xxAdc_common:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -86,8 +86,8 @@ class STM32F4xxAdc_common:
 		]
 
 class STM32F4xxCan_txmailbox:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -115,8 +115,8 @@ class STM32F4xxCan_txmailbox:
 		]
 
 class STM32F4xxCan_fifomailbox:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -144,8 +144,8 @@ class STM32F4xxCan_fifomailbox:
 		]
 
 class STM32F4xxCan_filterregister:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -171,8 +171,8 @@ class STM32F4xxCan_filterregister:
 		]
 
 class STM32F4xxCan:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -218,8 +218,8 @@ class STM32F4xxCan:
 		]
 
 class STM32F4xxCrc:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -254,8 +254,8 @@ class STM32F4xxCrc:
 		]
 
 class STM32F4xxDfsdm_filter:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f413xx.h
 		        stm32f412cx.h
@@ -283,8 +283,8 @@ class STM32F4xxDfsdm_filter:
 		]
 
 class STM32F4xxDfsdm_channel:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f413xx.h
 		        stm32f412cx.h
@@ -302,8 +302,8 @@ class STM32F4xxDfsdm_channel:
 		]
 
 class STM32F4xxDac:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -340,8 +340,8 @@ class STM32F4xxDac:
 		]
 
 class STM32F4xxDbgmcu:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -375,8 +375,8 @@ class STM32F4xxDbgmcu:
 		]
 
 class STM32F4xxDma_stream:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -412,8 +412,8 @@ class STM32F4xxDma_stream:
 		]
 
 class STM32F4xxDma:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -447,8 +447,8 @@ class STM32F4xxDma:
 		]
 
 class STM32F4xxExti:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -484,8 +484,8 @@ class STM32F4xxExti:
 		]
 
 class STM32F4xxFlash:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -522,8 +522,8 @@ class STM32F4xxFlash:
 		]
 
 class STM32F4xxFsmc_bank1:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f413xx.h
 		        stm32f415xx.h
@@ -540,8 +540,8 @@ class STM32F4xxFsmc_bank1:
 		]
 
 class STM32F4xxFsmc_bank1e:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f413xx.h
 		        stm32f415xx.h
@@ -558,8 +558,8 @@ class STM32F4xxFsmc_bank1e:
 		]
 
 class STM32F4xxGpio:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -598,8 +598,8 @@ class STM32F4xxGpio:
 		]
 
 class STM32F4xxSyscfgV1:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f413xx.h 
 		"""
@@ -617,8 +617,8 @@ class STM32F4xxSyscfgV1:
 		]
 
 class STM32F4xxSyscfg:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f469xx.h
 		        stm32f427xx.h
 		        stm32f479xx.h
@@ -643,8 +643,8 @@ class STM32F4xxSyscfg:
 		]
 
 class STM32F4xxSyscfgV2:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f412cx.h
 		        stm32f412rx.h
 		        stm32f410tx.h
@@ -665,8 +665,8 @@ class STM32F4xxSyscfgV2:
 		]
 
 class STM32F446Syscfg:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f446xx.h 
 		"""
 
@@ -681,8 +681,8 @@ class STM32F446Syscfg:
 		]
 
 class STM32F4xxI2c:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -718,8 +718,8 @@ class STM32F4xxI2c:
 		]
 
 class STM32F4xxI2cV1:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f415xx.h
 		        stm32f405xx.h
 		        stm32f407xx.h
@@ -739,8 +739,8 @@ class STM32F4xxI2cV1:
 		]
 
 class STM32F4xxFmpi2c:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f413xx.h
 		        stm32f412cx.h
@@ -768,8 +768,8 @@ class STM32F4xxFmpi2c:
 		]
 
 class STM32F4xxIwdg:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -803,8 +803,8 @@ class STM32F4xxIwdg:
 		]
 
 class STM32F4xxPwr:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -836,8 +836,8 @@ class STM32F4xxPwr:
 		]
 
 class STM32F4xxRccV1:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f413xx.h
 		        stm32f412rx.h
@@ -883,8 +883,8 @@ class STM32F4xxRccV1:
 		]
 
 class STM32F4xxRccV2:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f469xx.h
 		        stm32f427xx.h
 		        stm32f479xx.h
@@ -929,8 +929,8 @@ class STM32F4xxRccV2:
 		]
 
 class STM32F4xxRccV3:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f415xx.h
 		        stm32f405xx.h
 		        stm32f407xx.h
@@ -971,8 +971,8 @@ class STM32F4xxRccV3:
 		]
 
 class STM32F412Rcc:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f412cx.h 
 		"""
 
@@ -1011,8 +1011,8 @@ class STM32F412Rcc:
 		]
 
 class STM32F4xxRccV4:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f410tx.h
 		        stm32f410cx.h
 		        stm32f410rx.h 
@@ -1049,8 +1049,8 @@ class STM32F4xxRccV4:
 		]
 
 class STM32F446Rcc:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f446xx.h 
 		"""
 
@@ -1092,8 +1092,8 @@ class STM32F446Rcc:
 		]
 
 class STM32F4xxRcc:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f401xc.h
 		        stm32f401xe.h
 		        stm32f411xe.h 
@@ -1135,8 +1135,8 @@ class STM32F4xxRcc:
 		]
 
 class STM32F4xxRtc:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -1206,8 +1206,8 @@ class STM32F4xxRtc:
 		]
 
 class STM32F4xxSai:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -1224,8 +1224,8 @@ class STM32F4xxSai:
 		]
 
 class STM32F4xxSai_block:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -1249,8 +1249,8 @@ class STM32F4xxSai_block:
 		]
 
 class STM32F4xxSdio:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -1297,8 +1297,8 @@ class STM32F4xxSdio:
 		]
 
 class STM32F4xxSpi:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -1337,8 +1337,8 @@ class STM32F4xxSpi:
 		]
 
 class STM32F4xxQuadspi:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f479xx.h
@@ -1366,8 +1366,8 @@ class STM32F4xxQuadspi:
 		]
 
 class STM32F4xxTim:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -1418,8 +1418,8 @@ class STM32F4xxTim:
 		]
 
 class STM32F4xxUsart:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -1456,8 +1456,8 @@ class STM32F4xxUsart:
 		]
 
 class STM32F4xxWwdg:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -1490,8 +1490,8 @@ class STM32F4xxWwdg:
 		]
 
 class STM32F423Aes:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h 
 		"""
 
@@ -1523,8 +1523,8 @@ class STM32F423Aes:
 		]
 
 class STM32F4xxRng:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -1553,8 +1553,8 @@ class STM32F4xxRng:
 		]
 
 class STM32F4xxUsb_otg_globalV1:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f479xx.h
@@ -1594,8 +1594,8 @@ class STM32F4xxUsb_otg_globalV1:
 		]
 
 class STM32F4xxUsb_otg_global:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f427xx.h
 		        stm32f429xx.h
 		        stm32f439xx.h
@@ -1631,8 +1631,8 @@ class STM32F4xxUsb_otg_global:
 		]
 
 class STM32F4xxUsb_otg_device:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -1679,8 +1679,8 @@ class STM32F4xxUsb_otg_device:
 		]
 
 class STM32F4xxUsb_otg_inendpoint:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -1715,8 +1715,8 @@ class STM32F4xxUsb_otg_inendpoint:
 		]
 
 class STM32F4xxUsb_otg_outendpoint:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -1750,8 +1750,8 @@ class STM32F4xxUsb_otg_outendpoint:
 		]
 
 class STM32F4xxUsb_otg_host:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -1785,8 +1785,8 @@ class STM32F4xxUsb_otg_host:
 		]
 
 class STM32F4xxUsb_otg_hostchannel:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f469xx.h
 		        stm32f427xx.h
@@ -1820,8 +1820,8 @@ class STM32F4xxUsb_otg_hostchannel:
 		]
 
 class STM32F4xxLptim:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f423xx.h
 		        stm32f413xx.h
 		        stm32f410tx.h
@@ -1842,8 +1842,8 @@ class STM32F4xxLptim:
 		]
 
 class STM32F4xxDcmi:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f469xx.h
 		        stm32f427xx.h
 		        stm32f479xx.h
@@ -1870,8 +1870,8 @@ class STM32F4xxDcmi:
 		]
 
 class STM32F4xxDma2d:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f469xx.h
 		        stm32f427xx.h
 		        stm32f479xx.h
@@ -1907,8 +1907,8 @@ class STM32F4xxDma2d:
 		]
 
 class STM32F4xxDsi:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f469xx.h
 		        stm32f479xx.h 
 		"""
@@ -1990,8 +1990,8 @@ class STM32F4xxDsi:
 		]
 
 class STM32F4xxEth:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f469xx.h
 		        stm32f427xx.h
 		        stm32f479xx.h
@@ -2073,8 +2073,8 @@ class STM32F4xxEth:
 		]
 
 class STM32F4xxFmc_bank1:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f469xx.h
 		        stm32f427xx.h
 		        stm32f479xx.h
@@ -2089,8 +2089,8 @@ class STM32F4xxFmc_bank1:
 		]
 
 class STM32F4xxFmc_bank1e:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f469xx.h
 		        stm32f427xx.h
 		        stm32f479xx.h
@@ -2105,8 +2105,8 @@ class STM32F4xxFmc_bank1e:
 		]
 
 class STM32F4xxFmc_bank3:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f469xx.h
 		        stm32f479xx.h
 		        stm32f446xx.h 
@@ -2122,8 +2122,8 @@ class STM32F4xxFmc_bank3:
 		]
 
 class STM32F4xxFmc_bank5_6:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f469xx.h
 		        stm32f427xx.h
 		        stm32f479xx.h
@@ -2142,8 +2142,8 @@ class STM32F4xxFmc_bank5_6:
 		]
 
 class STM32F4xxLtdc:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f469xx.h
 		        stm32f479xx.h
 		        stm32f429xx.h
@@ -2171,8 +2171,8 @@ class STM32F4xxLtdc:
 		]
 
 class STM32F4xxLtdc_layer:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f469xx.h
 		        stm32f479xx.h
 		        stm32f429xx.h
@@ -2197,8 +2197,8 @@ class STM32F4xxLtdc_layer:
 		]
 
 class STM32F4xxFmc_bank2_3:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f427xx.h
 		        stm32f429xx.h
 		        stm32f439xx.h
@@ -2223,8 +2223,8 @@ class STM32F4xxFmc_bank2_3:
 		]
 
 class STM32F4xxFmc_bank4:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f427xx.h
 		        stm32f429xx.h
 		        stm32f439xx.h
@@ -2240,8 +2240,8 @@ class STM32F4xxFmc_bank4:
 		]
 
 class STM32F4xxCryp:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f479xx.h
 		        stm32f439xx.h
 		        stm32f415xx.h
@@ -2289,8 +2289,8 @@ class STM32F4xxCryp:
 		]
 
 class STM32F4xxHash:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f479xx.h
 		        stm32f439xx.h
 		        stm32f415xx.h
@@ -2310,8 +2310,8 @@ class STM32F4xxHash:
 		]
 
 class STM32F4xxHash_digestV1:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f479xx.h
 		        stm32f439xx.h
 		        stm32f437xx.h 
@@ -2322,8 +2322,8 @@ class STM32F4xxHash_digestV1:
 		]
 
 class STM32F4xxHash_digestV2:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f415xx.h
 		        stm32f417xx.h 
 		"""
@@ -2333,8 +2333,8 @@ class STM32F4xxHash_digestV2:
 		]
 
 class STM32F4xxFsmc_bank2_3:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f415xx.h
 		        stm32f405xx.h
 		        stm32f407xx.h
@@ -2359,8 +2359,8 @@ class STM32F4xxFsmc_bank2_3:
 		]
 
 class STM32F4xxFsmc_bank4:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f415xx.h
 		        stm32f405xx.h
 		        stm32f407xx.h
@@ -2376,8 +2376,8 @@ class STM32F4xxFsmc_bank4:
 		]
 
 class STM32F446Cec:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f446xx.h 
 		"""
 
@@ -2391,8 +2391,8 @@ class STM32F446Cec:
 		]
 
 class STM32F446Spdifrx:
-    class Type(ctypes.Structure):
-        """ the structure is available in :
+	class Type(ctypes.Structure):
+		""" the structure is available in :
 		        stm32f446xx.h 
 		"""
 

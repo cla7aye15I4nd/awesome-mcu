@@ -28,8 +28,8 @@ def format_struct(typename, fields):
         'uint8_t': 'ctypes.c_uint8',
     }
 
-    code  = '    class Type(ctypes.Structure):\n'
-    code += f'        """ COMMENT \n'
+    code  = '\tclass Type(ctypes.Structure):\n'
+    code += f'\t\t""" COMMENT \n'
     code += f'\t\t"""\n\n'
     code += '        _fields_ = [\n'
 
@@ -179,7 +179,7 @@ def generate_python(perip):
 
                 filename_list = ''
                 for filename in filenames:
-                    filename_list += f'\t\t        {filename}\n'
+                    filename_list += f'\t\t{" " * 8}{filename}\n'
                 filename_list = filename_list[:-1]
 
                 code = code.replace('COMMENT', f"the structure is available in :\n{filename_list}")

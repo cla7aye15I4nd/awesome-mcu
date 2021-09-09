@@ -120,7 +120,7 @@ int main(void)
   Task1Handle = osThreadCreate(osThread(Task1), NULL);
 
   /* definition and creation of Task2 */
-  osThreadDef(Task2, echo_server, osPriorityIdle, 0, 128);
+  osThreadDef(Task2, echo_server, osPriorityNormal, 0, 128);
   Task2Handle = osThreadCreate(osThread(Task2), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
@@ -256,9 +256,9 @@ void led_blink(void const * argument)
   for(;;)
   {
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
-    osDelay(50);
+    osDelay(1);
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-    osDelay(50);    
+    osDelay(1);    
   }
   /* USER CODE END 5 */
 }
@@ -276,8 +276,7 @@ void echo_server(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(200);
-    HAL_UART_Transmit(&huart2, "Free RTOS\n", 10, 100);
+    HAL_UART_Transmit(&huart2, "Free RTOS\n", 10, 100);    
   }
   /* USER CODE END echo_server */
 }

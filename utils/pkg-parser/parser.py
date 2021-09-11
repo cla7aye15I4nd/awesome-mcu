@@ -151,7 +151,7 @@ def parse_all_peripheral(parse_files):
     return perip
 
 def generate_python(perip):
-    with open(os.path.join('examples', f'{parse_type}.py'), 'w') as f:
+    with open(os.path.join(parse_type, f'{parse_type}.py'), 'w') as f:
         f.write('import ctypes\n\n')
 
         for perip_name, perip_set in perip.items():
@@ -337,7 +337,7 @@ def generate_config(c_header_file, perip):
 
         config[perip_tag] = info
 
-    with open(os.path.join('examples', c_header_file[:-4] + '.ql'), 'w') as f:
+    with open(os.path.join(parse_type, c_header_file[:-4] + '.ql'), 'w') as f:
         config.write(f)
 
 if __name__ == '__main__':

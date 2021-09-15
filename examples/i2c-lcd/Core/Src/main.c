@@ -92,10 +92,10 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
-  lcd_init(&hi2c1);
-  lcd_send_string(&hi2c1, "Hello World");
-  lcd_put_cur(&hi2c1, 1, 0);
-  lcd_send_string(&hi2c1, "I2C Connected");
+  lcd_init();
+  lcd_send_string("Hello World");
+  lcd_put_cur(1, 0);
+  lcd_send_string("I2C Connected");
 
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, SET);
   /* Infinite loop */

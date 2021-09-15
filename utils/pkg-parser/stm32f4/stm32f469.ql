@@ -421,6 +421,11 @@ base = 0x40023800
 class = STM32F4xxRccV2
 intn = 5
 
+[FLASH INTERFACE]
+type = periperal
+base = 0x40023c00
+class = STM32F4xxFlash
+
 [DMA1]
 type = periperal
 base = 0x40026000

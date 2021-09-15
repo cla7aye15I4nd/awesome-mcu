@@ -317,7 +317,7 @@ def generate_config(c_header_file, perip):
 
         _, perip_tag, info = line.split(maxsplit=2)
         if perip_tag == 'FLASH': # flash alias
-            continue
+            perip_tag = 'FLASH INTERFACE'
 
         if '_' in perip_tag:            
             continue

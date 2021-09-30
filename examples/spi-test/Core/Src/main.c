@@ -18,6 +18,8 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
+#include <stdio.h>
+#include <stdarg.h>
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -59,7 +61,26 @@ static void MX_USART2_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+static char buffer[0x100];
+void print(const char* fmt, ...) {
+  va_list argp;
+  va_start(argp, fmt);
+  
+  int len = sprintf(buffer, fmt, argp);
+  HAL_UART_Transmit(&huart2, buffer, len, HAL_MAX_DELAY);
 
+  va_end(argp);
+}
+
+void print_SPI1(void) {
+  print("CR1   : %08x\n", hspi1.Instance->CR1);
+  print("CR2   : %08x\n", SPI1->CR2);
+  print("SR    : %08x\n", SPI1->SR);
+  print("DR    : %08x\n", SPI1->DR);
+  print("CRCPR : %08x\n", SPI1->CRCPR);
+  print("RXCRCR: %08x\n", SPI1->RXCRCR);
+  print("TXCRCR: %08x\n", SPI1->TXCRCR);
+}
 /* USER CODE END 0 */
 
 /**
@@ -95,9 +116,9 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
-  uint8_t buf[0x400];
+  uint8_t buf[0x30];
   int i = 0, a = 0;
-  int len = 32, round = len * 0x10;
+  int len = 32, round = len * 8;
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -114,10 +135,10 @@ int main(void)
     i = (i + 1) % len;
   }
 
+  HAL_UART_Transmit(&huart2, "----------------TEST END----------------\n", 41, HAL_MAX_DELAY);
+
   while (1)
   {
-    /* USER CODE END WHILE */        
-    /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }

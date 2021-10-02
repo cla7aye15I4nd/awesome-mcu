@@ -14,6 +14,7 @@
 - [ARM-X](https://github.com/therealsaumil/armx) is a firmware emulation framework.
   - Slide: [ARM-X: The ARM IoT Firmware Emulation Framework](https://cyberweek.ae/materials/2019/D4%20TRACK%201%20-%20Introducing%20ARM-X%20%E2%80%93%20The%20ARM%20IoT%20Firmware%20Emulation%20Framework%20-%20Saumil%20Shah.pdf)
   - Youtube: [Introducing ARM-X: The ARM IoT Firmware Emulation Framework - Saumil Shah](https://www.youtube.com/watch?v=NVl6uJiEaoI)
+- [project_generator](https://github.com/project-generator/project_generator) allows you to define a project in text using YAML files and generate IDE project files based on the rules defined in records
 
 ## Projects
 
@@ -28,6 +29,7 @@
 - [FreeRTOS](https://github.com/FreeRTOS/FreeRTOS-Kernel) Real-time operating system for microcontrollers. ([bug notes](doc/freertos/bug.md))
   - AWS bug report: https://aws.amazon.com/cn/freertos/security-updates/
 - [RaceFlight](https://github.com/rs2k/raceflight)  Race prepared version of the cleanflight flight-controller
+- [Watch X](https://github.com/FASTSHIFT/WatchX) Open source smart watch, high quality and smooth (60FPS+) animation effects.
 
 ## Papers
 

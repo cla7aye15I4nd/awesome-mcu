@@ -1,6 +1,6 @@
 import pygame
 import threading
-
+        
 class LCD:
     @classmethod
     def get_raw_pattern(cls, lo, up):
@@ -87,6 +87,9 @@ class LCD1602(LCD):
         print('LCD quit')
         pygame.quit()
 
+    def run(self):
+        threading.Thread(target=self.render).start()
+
 if __name__ == '__main__':
     screen = LCD1602.make_screen(['I guess you are ', 'watching me. ^_^'])
 
@@ -102,7 +105,7 @@ if __name__ == '__main__':
         f.write(t.render(info = ''.join(screen)))
 
     lcd = LCD1602()
-    threading.Thread(target=lcd.render).start()
+    lcd.run()
     
     while True:
         info = input('Screen Info: ').ljust(32, ' ')

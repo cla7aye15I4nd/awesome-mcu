@@ -1,3 +1,5 @@
+from jinja2 import Template
+
 def get_raw_pattern(lo, up):
     with open('LCD1602A.txt') as f:
         lines = f.read().splitlines()[lo * 9 + 1: lo * 9 + 9]
@@ -35,4 +37,14 @@ def make_screen(infos):
     return screen
 
 if __name__ == '__main__':
-    print('\n'.join(make_screen(['I guess you are ', 'watching me. ^_^'])))
+    screen = make_screen(['I guess you are ', 'watching me. ^_^'])
+    
+    print('\n'.join(screen))
+
+    with open('templates/lcd1602.html') as f:
+        t = Template(f.read())
+
+    with open('examples/lcd1602.html', 'w') as f:
+        f.write(t.render(info = ''.join(screen)))
+    
+    

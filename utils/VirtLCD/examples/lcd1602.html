@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <body>        
+        <canvas id="screen" width="955px" height="245px"></canvas>
+        <script>
+            var screen = document.getElementById("screen");                        
+            
+            grid_size  = 10
+            grid_row_num = 8
+            grid_col_num = 5   
+            grid_interval = grid_size * 0.5       
+
+            char_row_num = 2
+            char_col_num = 16
+
+            margin = grid_size * 4
+
+            screen_width  = margin * 2 + grid_size * (char_col_num * grid_col_num) + grid_interval * (char_col_num - 1)
+            screen_height = margin * 2 + grid_size * (char_row_num * grid_row_num) + grid_interval * (char_row_num - 1)
+            
+            console.log(screen_width, screen_height)            
+
+            var context = screen.getContext('2d');
+
+            context.strokeStyle = "#000000";
+            context.fillStyle   = "#c9f6cd";                        
+            context.fillRect(0, 0, screen_width, screen_height)
+
+            context.lineWidth = 20;
+            context.strokeRect(0, 0, screen_width, screen_height)            
+            
+            var info = ' ###                                                                              #        ####                                                                   #       #   ##   # ###  ###  ###      #   # ### #   #      ### # ##  ###        #       #   ##   ##   ##    #         #   ##   ##   #         ###  ##   #       #        #####   ###### ###  ###       #####   ##   #      #####    #####       #           ##  ###        #    #         ##   ##  ##     #   ##    #          ###       ###  ## # ### #### ####       ###  ###  ## #      #####     ###                                                                                                 #        #      #                                       #         #             #        #               ####                          # #       # # #   # ### ###   ### # ##  ##  # ## #   #     ## #  ###           #   #     #   ##   #    # #   #    ##  #  #  ##  ##   #     # # ##   #                         #   # #### #   #    #   #  #  #   # ####     # # ######                         # # ##   # #  ##   ##   #  #  #   #    #     #   ##     ##                       # #  ####  ##  ### #   # ### #   # ###      #   # ###  ##            #####                                                                                     '
+            var it = 0
+
+            for (var i = 0; i < char_row_num * grid_row_num; ++i) {
+                for (var j = 0; j < char_col_num * grid_col_num; ++j) {                    
+                    x = margin + grid_size * j + grid_interval * Math.floor(j / grid_col_num)
+                    y = margin + grid_size * i + grid_interval * Math.floor(i / grid_row_num)             
+                    
+                    
+                    if (info[it] == ' ')
+                        context.fillStyle   = "#bbeebb"
+                    else
+                        context.fillStyle   = "#446644"
+                    
+                    it++
+                    context.fillRect(x, y, grid_size - 1, grid_size - 1)                    
+                }
+            }
+        </script>
+    </body>
+</html>

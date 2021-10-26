@@ -7,21 +7,24 @@
 // Halt on panic
 use panic_halt as _; // panic handler
 
+use core::cell::RefCell;
+use cortex_m::{interrupt::Mutex};
 use cortex_m_rt::entry;
 use stm32f4xx_hal as hal;
 
 use crate::hal::{pac, prelude::*, stm32, interrupt, serial};
 use hal::gpio::{gpioa, Alternate};
 
-static mut HUSART2: Option<
-    serial::Serial<
+type STM32F4Serial 
+    = serial::Serial<
         stm32::USART2,
         (
             gpioa::PA2<Alternate<hal::gpio::AF7>>,
             gpioa::PA3<Alternate<hal::gpio::AF7>>,
         ),
-    >,
-> = None;
+    >;
+
+static HUSART2: Mutex<RefCell<Option<STM32F4Serial>>> = Mutex::new(RefCell::new(None));
 
 #[entry]
 fn main() -> ! {
@@ -51,11 +54,10 @@ fn main() -> ! {
         .unwrap();
 
         ser.listen(serial::Event::Rxne); 
-        
+        cortex_m::interrupt::free(|cs| *HUSART2.borrow(cs).borrow_mut() = Some(ser));
 
         unsafe {
-            stm32::NVIC::unmask(hal::interrupt::USART2);   
-            HUSART2 = Some(ser);    
+            stm32::NVIC::unmask(hal::interrupt::USART2);            
         }
 
         let mut delay = hal::delay::Delay::new(cp.SYST, clocks);
@@ -73,7 +75,14 @@ fn main() -> ! {
 
 #[interrupt]
 fn USART2() {
-    let ser = unsafe { HUSART2.as_mut().unwrap() };
+    static mut SER: Option<STM32F4Serial> = None;
+    
+    let ser = SER.get_or_insert_with(|| {
+        cortex_m::interrupt::free(|cs| {        
+            HUSART2.borrow(cs).replace(None).unwrap()            
+        })
+    });
+        
     if ser.is_rxne() {
         let data = ser.read().unwrap();
         ser.write(data).unwrap();

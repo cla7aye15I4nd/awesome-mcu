@@ -9,5 +9,8 @@ all:
 	
 	st-flash --format=ihex write target/$(TARGET).hex
 
+format:
+	cargo fmt
+	
 clean:
 	cargo clean

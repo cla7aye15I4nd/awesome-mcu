@@ -78,5 +78,8 @@ fn USART2() {
     if ser.is_rxne() {
         let data = ser.read().unwrap();
         ser.write(data).unwrap();
+
+        // bug line
+        ser.write(data).unwrap();
     }
 }

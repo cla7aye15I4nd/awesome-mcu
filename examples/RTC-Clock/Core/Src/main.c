@@ -18,6 +18,7 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
+#include <string.h>
 #include "main.h"
 #include "i2c.h"
 #include "rtc.h"
@@ -106,15 +107,21 @@ int main(void)
     RTC_DateTypeDef date;  
   
     HAL_RTC_GetTime(&hrtc, &time, RTC_FORMAT_BIN);
-    HAL_RTC_GetDate(&hrtc, &date, RTC_FORMAT_BIN);  
-
+    HAL_RTC_GetDate(&hrtc, &date, RTC_FORMAT_BIN); 
+    
     sprintf(buf,"20%02d/%02d/%02d %s", date.Year, date.Month, date.Date, week[date.WeekDay]);
     lcd_put_cur(0, 1);
-    lcd_send_string(buf);
+    lcd_send_string(buf);    
 
+    memset(buf, 0, sizeof(buf));
     sprintf(buf,"%02d:%02d:%02d", time.Hours, time.Minutes, time.Seconds);
     lcd_put_cur(1, 4);
     lcd_send_string(buf);
+
+    buf[strlen(buf)] = '\n';
+    HAL_UART_Transmit(&huart2, buf, strlen(buf), HAL_MAX_DELAY);
+
+    HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 }

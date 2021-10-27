@@ -33,9 +33,17 @@ def get(tag):
                 cr.append((name, expr))
                 maxlen = max(maxlen, len(name))
 
+    cnt = 0
+    for k, v in cr:
+        if k:
+            cnt += 1
+
+    if cnt == 0:
+        return
     print(f'class {tag}(IntEnum):')
     for k, v in cr:
-        print(f'\t{k}{" " * (maxlen - len(k))} = {v}')
+        if k:
+            print(f'\t{k}{" " * (maxlen - len(k))} = {v}')
     print()
 
 def getall(tag):
@@ -61,4 +69,4 @@ def getall(tag):
                 pass    
 
 print('from enum import IntEnum\n\n')
-getall('DMA')
+getall('RTC')

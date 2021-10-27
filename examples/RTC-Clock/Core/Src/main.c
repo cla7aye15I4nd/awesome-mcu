@@ -94,24 +94,26 @@ int main(void)
   /* USER CODE BEGIN 2 */
   lcd_init();
   /* USER CODE END 2 */
-
-  RTC_TimeTypeDef time;
-  RTC_DateTypeDef date;  
-  char buf[32];
+  
+  char* week[7] = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {    
+    char buf[32];
+    RTC_TimeTypeDef time;
+    RTC_DateTypeDef date;  
+  
     HAL_RTC_GetTime(&hrtc, &time, RTC_FORMAT_BIN);
     HAL_RTC_GetDate(&hrtc, &date, RTC_FORMAT_BIN);  
 
-    sprintf(buf,"%04d/%02d/%02d %d", date.Year, date.Month, date.Date, date.WeekDay);
-    lcd_put_cur(0, 0);
+    sprintf(buf,"20%02d/%02d/%02d %s", date.Year, date.Month, date.Date, week[date.WeekDay]);
+    lcd_put_cur(0, 1);
     lcd_send_string(buf);
 
     sprintf(buf,"%02d:%02d:%02d", time.Hours, time.Minutes, time.Seconds);
-    lcd_put_cur(1, 0);
+    lcd_put_cur(1, 4);
     lcd_send_string(buf);
   }
   /* USER CODE END 3 */

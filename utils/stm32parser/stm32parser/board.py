@@ -39,11 +39,14 @@ class Board:
             name = perip.peripname
 
             print(f'Peripheral {name}:')
-            for key, val in self.context.items():
-                if key in self.used:
+            for ikey, val in self.context.items():
+                if ikey in self.used:
                     continue
 
-                if key.startswith(name + '_'):
-                    self.used.add(key)
-                    key = key[len(name)+1:]                    
+                if ikey.startswith(name + '_'):
+                    self.used.add(ikey)
 
+                    key = ikey[len(name) + 1:]
+                    if key.endswith('IRQn'):
+                        key = key.replace('IRQn', 'intn').lower()
+                        perip.keys[key] = val

@@ -58,17 +58,40 @@ class STM32F4HalParser(STM32Parser):
                             perip.keys['class'] = struct.aliasname
                             break
 
-    def output(self, dir):
+    def print_code(self, dir):
+        with open(os.path.join(dir, 'stm32f4.py'), 'w') as f:
+            f.write('import ctypes\n\n')
+
+            for _, perip_set in self.structs.items():
+                for perip in perip_set:
+                    f.write(f'class {perip.aliasname}:\n')
+                    f.write(f'    class Type(ctypes.Structure):\n')
+                    f.write(f'        """ the structure available in :\n')
+
+                    for file in perip.files:
+                        f.write(f'                {file}\n')
+                    
+                    f.write(f'        """\n\n')
+                    f.write(f'        _fields_ = [\n')
+
+                    varname_maxlen = 0
+                    typename_maxlen = 0
+                    for typename, varname, _ in perip.variables:
+                        varname_maxlen = max(varname_maxlen, len(varname))
+                        typename_maxlen = max(typename_maxlen, len(typename))
+
+                    for typename, varname, comment in perip.variables:
+                        f.write(f'            ("{varname}"{" " * (varname_maxlen - len(varname))}, {typename}),{" " * (typename_maxlen - len(typename))} #{comment}\n')
+
+                    f.write(f'        ]\n')
+                    f.write('\n')
+
+    def print_config(self, dir):
         def get_config_text(config):
             with TemporaryFile('w+t') as f:
                 config.write(f)
                 f.seek(0)
                 return f.read()
-
-        if os.path.exists(dir):
-            shutil.rmtree(dir)
-
-        os.mkdir(dir)
 
         config_map = {}
         for board in self.boards:
@@ -95,3 +118,12 @@ class STM32F4HalParser(STM32Parser):
             
             with open(os.path.join(dir, f'{version}.ql'), 'w') as f:
                 f.write(key)
+    
+    def output(self, dir):
+        if os.path.exists(dir):
+            shutil.rmtree(dir)
+
+        os.mkdir(dir)
+
+        self.print_code(dir)
+        self.print_config(dir)

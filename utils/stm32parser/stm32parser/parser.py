@@ -18,7 +18,6 @@ class STM32Parser:
         self.structs = {}
         self.load_board()
         self.load_all_peripheral()
-        self.compare_peripheral()        
 
     def gettypename(self, name: str) -> str:
         if name in self.type_table:
@@ -152,51 +151,3 @@ class STM32Parser:
                 lines.append(line)
 
         board.lines = lines
-
-    def compare_peripheral(self):
-        for board in self.boards:
-            for _, perip in board.peripheral.items():
-                self.find_struct(perip.classname)
-
-    def find_struct(self, name):
-        if name in self.structs:
-            return
-
-        print(f'Check {name}')
-        perips = []
-        self.structs[name] = []
-
-        for board in self.boards:
-            for _, perip in board.peripheral.items():
-                if perip.classname == name:
-                    perips.append((board, perip.struct))
-
-        for board, struct in perips:
-            for st in self.structs[name]:
-                if st == struct:
-                    if board.version not in st.files:
-                        st.files.append(board.version)
-                    break
-            else:
-                struct.files.append(board.version)
-                self.structs[name].append(struct)
-
-        verno = 0
-        size = len(self.structs[name])
-        for struct in self.structs[name]:
-            if 'stm32f411xe' in struct.files or size == 1:
-                struct.aliasname = f'STM32F4xx{name.capitalize()}'
-            else:
-                verno += 1
-                struct.aliasname = f'STM32F4xx{name.capitalize()}V{verno}'
-
-            print(struct.aliasname, struct.files)
-
-        for board in self.boards:
-            for _, perip in board.peripheral.items():
-                if perip.classname == name:
-                    for struct in self.structs[name]:
-                        if perip.struct == struct:
-                            perip.struct = struct
-                            perip.keys['class'] = struct.aliasname
-                            break

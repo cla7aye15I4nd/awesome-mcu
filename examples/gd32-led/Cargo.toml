@@ -1,0 +1,12 @@
+[package]
+name = "gd32-blinky"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+gd32vf103xx-hal = "0.5.0"
+embedded-hal = "0.2.6"
+nb = "1.0.0"
+riscv = "0.6.0"
+riscv-rt = "0.8.0"
+panic-halt = "0.2.0"

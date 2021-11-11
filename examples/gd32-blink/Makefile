@@ -26,7 +26,7 @@ OPT = -Og
 # Build path
 BUILD_DIR = build
 PACKAGE_DIR = ../../packages/GD32VF103
-RISCV_PACKAGE = $(PACKAGE_DIR)/Firmware/RISCV/drivers
+RISCV_INCLUDE = $(PACKAGE_DIR)/Firmware/RISCV/drivers
 
 ######################################
 # source
@@ -34,7 +34,7 @@ RISCV_PACKAGE = $(PACKAGE_DIR)/Firmware/RISCV/drivers
 # C sources
 C_SOURCES = \
 main.c \
-$(RISCV_PACKAGE)/n200_func.c
+$(RISCV_INCLUDE)/n200_func.c
 
 # ASM sources
 ASM_SOURCES  = \
@@ -65,12 +65,12 @@ BIN = $(CP) -O binary -S
 #######################################
 # AS includes
 AS_INCLUDES = \
--I$(RISCV_PACKAGE)
+-I$(RISCV_INCLUDE)
 
 # C includes
 C_INCLUDES =  \
 -Iinclude \
--I$(RISCV_PACKAGE)
+-I$(RISCV_INCLUDE)
 
 # common defines
 COMMON_DEF = -march=rv32imac -mabi=ilp32 -mcmodel=medlow

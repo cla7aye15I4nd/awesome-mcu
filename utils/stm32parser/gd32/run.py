@@ -175,4 +175,30 @@ with open('gd32vf103.ql', 'w') as f:
     for key, val in config.items():
         new_config[key] = val
 
+    f.write("""[FLASH]
+type = memory
+size = 0x20000
+base = 0x08000000
+
+[SRAM]
+type = memory
+size = 0x18000
+base = 0x20000000
+
+[BOOT]
+type = memory
+size = 0x5000
+base = 0x1fffb000
+
+[PERIP]
+type = mmio
+size = 0x40000
+base = 0x40000000
+
+[USBFS]
+type = mmio
+size = 0x40000
+base = 0x50000000
+
+""")
     new_config.write(f)

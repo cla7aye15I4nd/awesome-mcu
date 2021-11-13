@@ -26,6 +26,11 @@ for perip in perips:
         const_file = ''
         item_list = []
         node = {}
+
+        derive = perip.attrib.get('derivedFrom', None)
+        if derive:
+            info['class'] = config[derive]['class']
+            
         for attr in perip:      
 
             if attr.tag == 'name':

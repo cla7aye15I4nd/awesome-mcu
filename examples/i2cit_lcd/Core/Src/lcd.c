@@ -76,5 +76,5 @@ void lcd_put_cur(int row, int col){
 void lcd_clear(void)
 {
 	lcd_send_cmd(0x01);
-    HAL_Delay(10);
+    HAL_Delay(5);
 }

@@ -98,19 +98,6 @@ int main(void)
   for (int i = 0; i < 32; ++i)
     position[i] = i;
 
-  for (int i = 0; i < 31; ++i) {
-    int j = rand() % (32 - i);
-
-    int tmp = position[i];
-    position[i] = position[j];
-    position[j] = tmp;
-  }
-  
-  for (int i = 0; i < 32; ++i) {
-    lcd_put_cur(position[i] / 16, position[i] % 16);
-    lcd_send_byte_it(screen[i]);
-  }
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -118,7 +105,19 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+    for (int i = 0; i < 31; ++i) {
+      int j = rand() % (32 - i);
 
+      int tmp = position[i];
+      position[i] = position[j];
+      position[j] = tmp;
+    }
+    
+    for (int i = 0; i < 32; ++i) {
+      lcd_put_cur(position[i] / 16, position[i] % 16);
+      lcd_send_byte_it(screen[i]);
+      HAL_Delay(500);
+    }
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

@@ -117,6 +117,7 @@ int main(void)
       lcd_put_cur(position[i] / 16, position[i] % 16);
       lcd_send_byte_it(screen[i]);
       HAL_Delay(500);
+      HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
     }
     /* USER CODE BEGIN 3 */
   }

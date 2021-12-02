@@ -37,6 +37,7 @@
 - [Jetset: Targeted Firmware Rehosting for Embedded Systems](https://www.usenix.org/system/files/sec21fall-johnson.pdf)
 - [DICE: Automatic Emulation of DMA Input Channels for Dynamic Firmware Analysis](https://arxiv.org/pdf/2007.01502.pdf)
 - [PASAN: Detecting Peripheral Access Concurrency Bugs within Bare-Metal Embedded Applications](https://www.usenix.org/conference/usenixsecurity21/presentation/kim)
+- [FirmGuide: Boosting the Capability of Rehosting Embedded Linux Kernels through Model-Guided Kernel Execution](http://yajin.org/papers/ase21_firmguide.pdf)
 - [Frankenstein: Advanced Wireless Fuzzing to Exploit New Bluetooth Escalation Targets](https://www.usenix.org/conference/usenixsecurity20/presentation/ruge)
 
 ## Slides

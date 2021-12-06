@@ -1,6 +1,5 @@
 #ifndef __OLED_H
 #define __OLED_H
-
 #include "main.h"
 
 
@@ -11,9 +10,10 @@
 #define Max_Row		64
 #define	Brightness	0xFF 
 #define X_WIDTH 	128
-#define Y_WIDTH 	64	  
+#define Y_WIDTH 	64	    
 
-#define ASSERT(x) if ((x) != HAL_OK) for(;;);
+//-----------------OLED端口定义----------------  					   
+
 
 #define OLED_SCLK_Clr() HAL_GPIO_WritePin(OLED_SCLK_GPIO_Port, OLED_SCLK_Pin, GPIO_PIN_RESET);
 #define OLED_SCLK_Set() HAL_GPIO_WritePin(OLED_SCLK_GPIO_Port, OLED_SCLK_Pin, GPIO_PIN_SET);
@@ -48,5 +48,4 @@ void OLED_ShowString(uint8_t x,uint8_t y, uint8_t *p);
 void OLED_Set_Pos(unsigned char x, unsigned char y);
 void OLED_ShowCHinese(uint8_t x,uint8_t y,uint8_t no);
 void OLED_DrawBMP(unsigned char x0, unsigned char y0,unsigned char x1, unsigned char y1,unsigned char BMP[]);
-
-#endif  
+#endif

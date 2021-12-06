@@ -1,5 +1,5 @@
 #include "oled.h"
-#include "font.h"  	 
+#include "oledfont.h"  	 
 #include "main.h"
 #include "spi.h"
 
@@ -26,8 +26,7 @@ void OLED_WR_Byte(uint8_t dat,uint8_t cmd)
 	else
 	OLED_DC_Clr();//命令/数据标志位置为0，则表示传送的是数据字节		  
 	  OLED_CS_Clr();//片选信号为低，表示选中OLED
-	  ASSERT(HAL_SPI_Transmit(&hspi3,&dat,1,1000));
-	  //oled.c文件唯一修改的地方，这里是利用了hal库提供的SPI传送函数
+	  HAL_SPI_Transmit(&hspi1,&dat,1,1000);//oled.c文件唯一修改的地方，这里是利用了hal库提供的SPI传送函数
 	  OLED_CS_Set();
 	  OLED_DC_Set();	  
 }
@@ -180,8 +179,8 @@ void OLED_Init(void)
 	OLED_RST_Set(); 
 	
 	OLED_WR_Byte(0xAE,OLED_CMD);//--turn off oled panel
-	OLED_WR_Byte(0x02,OLED_CMD);//---set low column address
-	OLED_WR_Byte(0x10,OLED_CMD);//---set high column address
+	OLED_WR_Byte(0xD5,OLED_CMD);//---set low column address
+	OLED_WR_Byte(0x80,OLED_CMD);//---set high column address
 	OLED_WR_Byte(0x40,OLED_CMD);//--set start line address  Set Mapping RAM Display Start Line (0x00~0x3F)
 	OLED_WR_Byte(0x81,OLED_CMD);//--set contrast control register
 	OLED_WR_Byte(0xCF,OLED_CMD); // Set SEG Output Current Brightness
@@ -207,7 +206,7 @@ void OLED_Init(void)
 	OLED_WR_Byte(0xA4,OLED_CMD);// Disable Entire Display On (0xa4/0xa5)
 	OLED_WR_Byte(0xA6,OLED_CMD);// Disable Inverse Display On (0xa6/a7) 
 	OLED_WR_Byte(0xAF,OLED_CMD);//--turn on oled panel
-	
 	OLED_WR_Byte(0xAF,OLED_CMD); /*display ON*/ 
+
 	OLED_Clear();
 }  

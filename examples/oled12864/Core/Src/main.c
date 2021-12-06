@@ -20,6 +20,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "spi.h"
+#include "usart.h"
 #include "gpio.h"
 #include "oled.h"
 /* Private includes ----------------------------------------------------------*/
@@ -86,36 +87,34 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_SPI3_Init();
+  MX_SPI1_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-  
   OLED_Init();
 	OLED_Clear();
+  /* USER CODE END 2 */
 
-  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+  OLED_ShowCHinese(0,0,0);
+  OLED_ShowCHinese(18,0,1);
+  OLED_ShowCHinese(36,0,2);
+  OLED_ShowCHinese(54,0,3);
+  OLED_ShowCHinese(72,0,4);
+  OLED_ShowCHinese(0,3,5);
+  OLED_ShowCHinese(18,3,6);
+  OLED_ShowCHinese(36,3,7);
+  OLED_ShowCHinese(54,3,8);
+  OLED_ShowCHinese(72,3,9);
+  OLED_ShowCHinese(0,6,10);
+  OLED_ShowCHinese(18,6,11);
+  OLED_ShowCHinese(36,6,12);
+  OLED_ShowCHinese(54,6,13);
+  OLED_ShowCHinese(72,6,14);
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
-    OLED_ShowCHinese(0,0,0);
-		OLED_ShowCHinese(18,0,1);
-		OLED_ShowCHinese(36,0,2);
-		OLED_ShowCHinese(54,0,3);
-		OLED_ShowCHinese(72,0,4);
-		OLED_ShowCHinese(0,3,5);
-		OLED_ShowCHinese(18,3,6);
-		OLED_ShowCHinese(36,3,7);
-		OLED_ShowCHinese(54,3,8);
-		OLED_ShowCHinese(72,3,9);
-		OLED_ShowCHinese(0,6,10);
-		OLED_ShowCHinese(18,6,11);
-		OLED_ShowCHinese(36,6,12);
-		OLED_ShowCHinese(54,6,13);
-		OLED_ShowCHinese(72,6,14);
-    HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-    HAL_Delay(500);
+    /* USER CODE END WHILE */    
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -137,10 +136,14 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
-  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  RCC_OscInitStruct.PLL.PLLM = 12;
+  RCC_OscInitStruct.PLL.PLLN = 96;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+  RCC_OscInitStruct.PLL.PLLQ = 4;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -149,12 +152,12 @@ void SystemClock_Config(void)
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3) != HAL_OK)
   {
     Error_Handler();
   }

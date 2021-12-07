@@ -91,7 +91,6 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   OLED_Init();
-	OLED_Clear();
   /* USER CODE END 2 */
 
   OLED_ShowCHinese(0,0,0);
@@ -99,22 +98,34 @@ int main(void)
   OLED_ShowCHinese(36,0,2);
   OLED_ShowCHinese(54,0,3);
   OLED_ShowCHinese(72,0,4);
+
   OLED_ShowCHinese(0,3,5);
   OLED_ShowCHinese(18,3,6);
   OLED_ShowCHinese(36,3,7);
   OLED_ShowCHinese(54,3,8);
   OLED_ShowCHinese(72,3,9);
+
   OLED_ShowCHinese(0,6,10);
   OLED_ShowCHinese(18,6,11);
   OLED_ShowCHinese(36,6,12);
   OLED_ShowCHinese(54,6,13);
   OLED_ShowCHinese(72,6,14);
 
+  
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  uint32_t k = 9;
+  
   while (1)
   {
-    /* USER CODE END WHILE */    
+    /* USER CODE END WHILE */      
+    OLED_ShowNum(90, 0, k % 10); k = k * 998244353;
+    OLED_ShowNum(90, 3, k % 10); k = k * 998244353;
+    OLED_ShowNum(90, 6, k % 10); k = k * 998244353;
+    OLED_ShowNum(100, 0, k % 10); k = k * 998244353;
+    OLED_ShowNum(100, 3, k % 10); k = k * 998244353;
+    OLED_ShowNum(100, 6, k % 10);  k = k * 998244353;
+    HAL_Delay(1000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

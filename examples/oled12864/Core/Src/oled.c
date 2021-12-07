@@ -34,8 +34,8 @@ void OLED_WR_Byte(uint8_t dat,uint8_t cmd)
 	void OLED_Set_Pos(unsigned char x, unsigned char y) 
 { 
 	OLED_WR_Byte(0xb0+y,OLED_CMD);
-	OLED_WR_Byte((((x+2)&0xf0)>>4)|0x10,OLED_CMD);
-	OLED_WR_Byte(((x+2)&0x0f),OLED_CMD); 
+	OLED_WR_Byte(((x&0xf0)>>4)|0x10,OLED_CMD);
+	OLED_WR_Byte((x&0x0f),OLED_CMD); 
 }    	  
 //开启OLED显示
 void OLED_Display_On(void)
@@ -104,24 +104,9 @@ uint32_t oled_pow(uint8_t m,uint8_t n)
 //size:字体大小
 //mode:0:填充模式；1:叠加模式
 //num:数值(0~4294967295);	 		  
-void OLED_ShowNum(uint8_t x,uint8_t y,uint32_t num,uint8_t len,uint8_t size)
+void OLED_ShowNum(uint8_t x,uint8_t y,uint32_t num)
 {         	
-	uint8_t t,temp;
-	uint8_t enshow=0;						   
-	for(t=0;t<len;t++)
-	{
-		temp=(num/oled_pow(10,len-t-1))%10;
-		if(enshow==0&&t<(len-1))
-		{
-			if(temp==0)
-			{
-				OLED_ShowChar(x+(size/2)*t,y,' ');
-				continue;
-			}else enshow=1; 
-		 	 
-		}
-	 	OLED_ShowChar(x+(size/2)*t,y,temp+'0'); 
-	}
+	OLED_ShowChar(x,y,num+'0');
 } 
 //显示一个字符串
 void OLED_ShowString(uint8_t x,uint8_t y,uint8_t *chr)

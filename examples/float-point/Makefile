@@ -60,6 +60,7 @@ $(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c \
 Core/Src/system_stm32f4xx.c \
 Core/Src/spi.c \
 $(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c
+# $(PACKAGE_DIR)/Drivers/CMSIS/DSP/Source/FastMathFunctions/arm_cos_f32.c
 
 # ASM sources
 ASM_SOURCES =  \
@@ -96,7 +97,7 @@ CPU = -mcpu=cortex-m4
 FPU = -mfpu=fpv4-sp-d16
 
 # float-abi
-FLOAT-ABI = -mfloat-abi=hard
+FLOAT-ABI = -mfloat-abi=hard 
 
 # mcu
 MCU = $(CPU) -mthumb $(FPU) $(FLOAT-ABI)
@@ -120,8 +121,8 @@ C_INCLUDES =  \
 -I$(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Inc \
 -I$(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy \
 -I$(PACKAGE_DIR)/Drivers/CMSIS/Device/ST/STM32F4xx/Include \
--I$(PACKAGE_DIR)/Drivers/CMSIS/Include
-
+-I$(PACKAGE_DIR)/Drivers/CMSIS/Include \
+-I$(PACKAGE_DIR)/Drivers/CMSIS/DSP/Include
 
 # compile gcc flags
 ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
@@ -146,7 +147,7 @@ LDSCRIPT = STM32F407VETx_FLASH.ld
 # libraries
 LIBS = -lc -lm -lnosys 
 LIBDIR = 
-LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections
+LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections -u _printf_float
 
 # default action: build all
 all: $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).hex $(BUILD_DIR)/$(TARGET).bin

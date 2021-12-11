@@ -29,6 +29,6 @@ void oled_clear(void);
 void oled_putchar(uint32_t, uint32_t, char);
 void oled_print(uint32_t, uint32_t, char *);	 
 void oled_set_position(uint32_t, uint32_t);
-void oprintf(const char*, ...);
+void oprintf(uint32_t, const char*, ...);
 
 #endif // __OLED_H

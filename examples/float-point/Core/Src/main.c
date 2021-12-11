@@ -22,6 +22,7 @@
 #include "spi.h"
 #include "oled.h"
 #include "gpio.h"
+// #include "arm_math.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -59,6 +60,14 @@ void SystemClock_Config(void);
 
 /* USER CODE END 0 */
 
+float nt_sqrt(float x) {
+  float sq = x;
+  for (int i = 0; i < 50; ++i) {
+    sq = (x / sq + sq) / 2;    
+  }
+  return sq;
+}
+
 /**
   * @brief  The application entry point.
   * @retval int
@@ -89,20 +98,23 @@ int main(void)
   MX_GPIO_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
-  
-  HAL_GPIO_TogglePin(LED3_GPIO_Port, LED3_Pin);
   /* USER CODE END 2 */
   oled_init();
 
-  oprintf("0123456789abcdefghijlmopqrstuvwxyzABCDEFGHIJKLMOPQRSTUVWXYZ");
-  oprintf("opqrstuvwxyzABCDEFGHIJKLMOPQRSTUVWXYZ");
+  oprintf(0, "sqrt(2)=%.6f", nt_sqrt(2));
+  oprintf(2, "sqrt(3)=%.6f", nt_sqrt(3));
+  oprintf(4, "sqrt(5)=%.6f", nt_sqrt(5));
+  oprintf(6, "sqrt(7)=%.6f", nt_sqrt(7));
+  
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
   while (1)
   {
     /* USER CODE END WHILE */
-
+    HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
+    HAL_GPIO_TogglePin(LED3_GPIO_Port, LED3_Pin);
+    HAL_Delay(2000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

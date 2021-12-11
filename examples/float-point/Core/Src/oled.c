@@ -62,13 +62,13 @@ void oled_print(uint32_t x, uint32_t y, char *ptr) {
   }
 }
 
-static char buffer[0x100];
-void oprintf(const char* fmt, ...) {
+static char buffer[64];
+void oprintf(uint32_t y, const char* fmt, ...) {
   va_list argp;
   va_start(argp, fmt);
   
   sprintf(buffer, fmt, argp);
-  oled_print(0, 0, buffer);
+  oled_print(0, y, buffer);
 
   va_end(argp);
 }

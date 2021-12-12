@@ -103,8 +103,8 @@ int main(void)
   char buffer[64];
   oprintf(0, "sqrt(2)=%.6f", nt_sqrt(2));
   oprintf(1, "sqrt(3)=%.6f", nt_sqrt(3));
-  oprintf(2, "sqrt(5)=%.6f", nt_sqrt(5));
-  oprintf(3, "cos(7)=%.6f", arm_cos_f32(7));
+  oprintf(2, "sin(60)=%.6f", arm_sin_f32(PI/3));
+  oprintf(3, "cos(60)=%.6f", arm_cos_f32(PI/3));
   /* USER CODE END 2 */
   
   /* Infinite loop */

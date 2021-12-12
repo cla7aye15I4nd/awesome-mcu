@@ -20,13 +20,13 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "spi.h"
-#include "oled.h"
 #include "gpio.h"
-// #include "arm_math.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "oled.h"
+#include "arm_math.h"
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -98,13 +98,14 @@ int main(void)
   MX_GPIO_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
-  /* USER CODE END 2 */
   oled_init();
 
+  char buffer[64];
   oprintf(0, "sqrt(2)=%.6f", nt_sqrt(2));
-  oprintf(2, "sqrt(3)=%.6f", nt_sqrt(3));
-  oprintf(4, "sqrt(5)=%.6f", nt_sqrt(5));
-  oprintf(6, "sqrt(7)=%.6f", nt_sqrt(7));
+  oprintf(1, "sqrt(3)=%.6f", nt_sqrt(3));
+  oprintf(2, "sqrt(5)=%.6f", nt_sqrt(5));
+  oprintf(3, "cos(7)=%.6f", arm_cos_f32(7));
+  /* USER CODE END 2 */
   
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */

@@ -59,8 +59,17 @@ $(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
 $(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c \
 Core/Src/system_stm32f4xx.c \
 Core/Src/spi.c \
-$(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c
-# $(PACKAGE_DIR)/Drivers/CMSIS/DSP/Source/FastMathFunctions/arm_cos_f32.c
+$(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c \
+$(wildcard $(PACKAGE_DIR)/Drivers/CMSIS/DSP/Source/BasicMathFunctions/*.c) \
+$(wildcard $(PACKAGE_DIR)/Drivers/CMSIS/DSP/Source/CommonTables/*.c) \
+$(wildcard $(PACKAGE_DIR)/Drivers/CMSIS/DSP/Source/ComplexMathFunctions/*.c) \
+$(wildcard $(PACKAGE_DIR)/Drivers/CMSIS/DSP/Source/ControllerFunctions/*.c) \
+$(wildcard $(PACKAGE_DIR)/Drivers/CMSIS/DSP/Source/FastMathFunctions/*.c) \
+$(wildcard $(PACKAGE_DIR)/Drivers/CMSIS/DSP/Source/FilteringFunctions/*.c) \
+$(wildcard $(PACKAGE_DIR)/Drivers/CMSIS/DSP/Source/MatrixFunctions/*.c) \
+$(wildcard $(PACKAGE_DIR)/Drivers/CMSIS/DSP/Source/StatisticsFunctions/*.c) \
+$(wildcard $(PACKAGE_DIR)/Drivers/CMSIS/DSP/Source/SupportFunctions/*.c) \
+$(wildcard $(PACKAGE_DIR)/Drivers/CMSIS/DSP/Source/TransformFunctions/*.c)
 
 # ASM sources
 ASM_SOURCES =  \
@@ -109,8 +118,9 @@ AS_DEFS =
 # C defines
 C_DEFS =  \
 -DUSE_HAL_DRIVER \
--DSTM32F407xx
-
+-DSTM32F407xx \
+-D__FPU_PRESENT \
+-DARM_MATH_CM4
 
 # AS includes
 AS_INCLUDES = 

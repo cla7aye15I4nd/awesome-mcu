@@ -2,8 +2,6 @@
 #include "main.h"
 #include "font.h"
 #include "spi.h"
-#include <stdarg.h>
-#include <stdio.h>
 
 void oled_write_byte(uint8_t byte, uint8_t flag) {
   if (flag)
@@ -61,18 +59,6 @@ void oled_print(uint32_t x, uint32_t y, char *ptr) {
     x += 8;
   }
 }
-
-static char buffer[64];
-void oprintf(uint32_t y, const char* fmt, ...) {
-  va_list argp;
-  va_start(argp, fmt);
-  
-  sprintf(buffer, fmt, argp);
-  oled_print(0, y, buffer);
-
-  va_end(argp);
-}
-
 
 void oled_init(void) {
 

@@ -29,6 +29,11 @@ void oled_clear(void);
 void oled_putchar(uint32_t, uint32_t, char);
 void oled_print(uint32_t, uint32_t, char *);	 
 void oled_set_position(uint32_t, uint32_t);
-void oprintf(uint32_t, const char*, ...);
+
+#define oprintf(y, fmt, ...)            \
+{                                       \
+  sprintf(buffer, fmt, __VA_ARGS__);    \
+  oled_print(0, y * 2, buffer);         \
+}
 
 #endif // __OLED_H

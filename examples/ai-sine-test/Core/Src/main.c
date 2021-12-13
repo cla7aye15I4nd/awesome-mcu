@@ -105,7 +105,6 @@ int main(void)
   AI_ALIGNED(32) ai_i8 out_data[AI_SINEMODEL_OUT_1_SIZE_BYTES];
 
   ai_error ai_err;
-  ai_i32 nbatch;
 
   ai_handle sinemodel = AI_HANDLE_NULL;
 
@@ -130,16 +129,17 @@ int main(void)
 
   ai_sinemodel_init(sinemodel, &ai_params);
 
-  for (int i = 0; i < AI_SINEMODEL_IN_1_SIZE; ++i)
-    ((ai_float *)in_data)[i] = (ai_float) 2.0f;
+  ((ai_float *)in_data)[0] = (ai_float) 1.0f;
+  ai_sinemodel_run(sinemodel, &ai_input[0], &ai_output[0]);
+  oprintf(1, "sin(1)=%.7f", ((float *)out_data)[0]);
 
-  nbatch = ai_sinemodel_run(sinemodel, &ai_input[0], &ai_output[0]);
-  if (nbatch != 1) {
-    oprintf(1, "Run Error");
-    while(1);
-  }
+  ((ai_float *)in_data)[0] = (ai_float) 2.0f;
+  ai_sinemodel_run(sinemodel, &ai_input[0], &ai_output[0]);
+  oprintf(2, "sin(2)=%.7f", ((float *)out_data)[0]);
 
-  oprintf(2, "result: %f", ((float *)out_data)[0]);
+  ((ai_float *)in_data)[0] = (ai_float) 3.0f;
+  ai_sinemodel_run(sinemodel, &ai_input[0], &ai_output[0]);
+  oprintf(3, "sin(3)=%.7f", ((float *)out_data)[0]);
   /* USER CODE END 2 */
 
   /* Infinite loop */

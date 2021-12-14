@@ -11,7 +11,8 @@ void oled_write_byte(uint8_t byte, uint8_t flag) {
 
   OLED_CS_RESET();
 
-  HAL_SPI_Transmit(&hspi1, &byte, 1, HAL_MAX_DELAY);
+  if (HAL_SPI_Transmit(&hspi1, &byte, 1, HAL_MAX_DELAY) != HAL_OK)
+    while(1);
   OLED_CS_SET();
   OLED_DC_SET();
 }

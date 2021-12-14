@@ -31,6 +31,8 @@
 #include "sinemodel.h"
 #include "sinemodel_data.h"
 #include <stdio.h>
+
+#define ASSERT(x) if (!(x)) while(1);
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -130,15 +132,15 @@ int main(void)
   ai_sinemodel_init(sinemodel, &ai_params);
 
   ((ai_float *)in_data)[0] = (ai_float) 1.0f;
-  ai_sinemodel_run(sinemodel, &ai_input[0], &ai_output[0]);
+  ASSERT(ai_sinemodel_run(sinemodel, &ai_input[0], &ai_output[0]) == 1);
   oprintf(1, "sin(1)=%.7f", ((float *)out_data)[0]);
 
   ((ai_float *)in_data)[0] = (ai_float) 2.0f;
-  ai_sinemodel_run(sinemodel, &ai_input[0], &ai_output[0]);
+  ASSERT(ai_sinemodel_run(sinemodel, &ai_input[0], &ai_output[0]) == 1);;
   oprintf(2, "sin(2)=%.7f", ((float *)out_data)[0]);
 
   ((ai_float *)in_data)[0] = (ai_float) 3.0f;
-  ai_sinemodel_run(sinemodel, &ai_input[0], &ai_output[0]);
+  ASSERT(ai_sinemodel_run(sinemodel, &ai_input[0], &ai_output[0]) == 1);;
   oprintf(3, "sin(3)=%.7f", ((float *)out_data)[0]);
   /* USER CODE END 2 */
 

@@ -1,0 +1,110 @@
+Neural Network Tools for STM32AI v1.5.1 (STM.ai v7.0.0-RC8)
+Created date          : 2021-12-14 21:42:31
+Parameters            : generate --name mnist -m /home/moe/Downloads/MNIST_optimized_for_size.tflite --type tflite --compression 1 --verbosity 1 --workspace /tmp/mxAI_workspace70584916379971983412817616073758 --output /home/moe/.stm32cubemx
+
+Exec/report summary (generate)
+------------------------------------------------------------------------------------------------------------------------
+model file            : /home/moe/Downloads/MNIST_optimized_for_size.tflite
+type                  : tflite
+c_name                : mnist
+workspace dir         : /tmp/mxAI_workspace70584916379971983412817616073758
+output dir            : /home/moe/.stm32cubemx
+
+model_name            : MNIST_optimized_for_size
+model_hash            : 7ca1756caa8681c732f75a325fac3146
+input                 : conv2d_1_input [784 items, 3.06 KiB, ai_float, float, (1, 28, 28, 1)]
+inputs (total)        : 3.06 KiB
+output                : nl_4 [10 items, 40 B, ai_float, float, (1, 1, 1, 10)]
+outputs (total)       : 40 B
+params #              : 20,410 items (20.31 KiB)
+macc                  : 101,572
+weights (ro)          : 81,640 B (79.73 KiB) / +60,840(+292.5%) vs original model
+activations (rw)      : 10,608 B (10.36 KiB) 
+ram (total)           : 13,784 B (13.46 KiB) = 10,608 + 3,136 + 40
+
+Model name - MNIST_optimized_for_size ['conv2d_1_input'] ['nl_4']
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+id   layer (type)             oshape               param/size      macc     connected to     |   c_size             c_macc            c_type               
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+0    conv2d_1_input (Input)   (h:28, w:28, c:1)                                              |                                       
+     conv2d_0 (Conv2D)        (h:26, w:26, c:12)   120/480         73,020   conv2d_1_input   |                      +8,112(+11.1%)    optimized_conv2d()[0]
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+1    pool_1 (Pool)            (h:13, w:13, c:12)                   8,112    conv2d_0         |                      -8,112(-100.0%)  
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+2    reshape_2 (Reshape)      (c:2028)                                      pool_1           |                                       
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+3    dense_3 (Dense)          (c:10)               20,290/20,320   20,290   reshape_2        |   +60,840(+299.4%)                     dense()[1]           
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+4    nl_4 (Nonlinearity)      (c:10)                               150      dense_3          |                                        nl()/o[2]            
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+model/c-model: macc=101,572/101,572  weights=20,800/81,640 +60,840(+292.5%) activations=--/10,608 io=--/3,176
+
+
+
+Generated C-graph summary
+------------------------------------------------------------------------------------------------------------------------
+model name            : mnist_optimized_for_size
+c-name                : mnist
+c-node #              : 3
+c-array #             : 9
+activations size      : 10608
+weights size          : 81640
+macc                  : 101572
+inputs                : ['conv2d_1_input_output']
+outputs               : ['nl_4_output']
+
+
+
+C-Arrays (9)
+------------------------------------------------------------------------------------------------------------------------
+c_id  name (*_array)         item/size           mem-pool     c-type       fmt    comment            
+------------------------------------------------------------------------------------------------------------------------
+0     conv2d_1_input_output  784/3136            user         float        float  /input             
+1     conv2d_0_output        2028/8112           activations  float        float                     
+2     dense_3_output         10/40               activations  float        float                     
+3     nl_4_output            10/40               user         float        float  /output            
+4     conv2d_0_weights       108/432             weights      const float  float                     
+5     conv2d_0_bias          12/48               weights      const float  float                     
+6     dense_3_weights        20280/81120         weights      const float  float                     
+7     dense_3_bias           10/40               weights      const float  float                     
+8     conv2d_0_scratch0      624/2496            activations  float        float                     
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+C-Layers (3)
+------------------------------------------------------------------------------------------------------------------------
+c_id  name (*_layer)  id  layer_type        macc        rom         tensors                   shape (array id)                       
+------------------------------------------------------------------------------------------------------------------------
+0     conv2d_0        1   optimized_conv2d  81132       480         I: conv2d_1_input_output  (1, 28, 28, 1) (0)                     
+                                                                    S: conv2d_0_scratch0                                             
+                                                                    W: conv2d_0_weights                                              
+                                                                    W: conv2d_0_bias                                                 
+                                                                    O: conv2d_0_output        (1, 13, 13, 12) (1)                    
+------------------------------------------------------------------------------------------------------------------------
+1     dense_3         3   dense             20290       81160       I: conv2d_0_output0       (1, 1, 1, 2028) (1)                    
+                                                                    W: dense_3_weights                                               
+                                                                    W: dense_3_bias                                                  
+                                                                    O: dense_3_output         (1, 1, 1, 10) (2)                      
+------------------------------------------------------------------------------------------------------------------------
+2     nl_4            4   nl                150         0           I: dense_3_output         (1, 1, 1, 10) (2)                      
+                                                                    O: nl_4_output            (1, 1, 1, 10) (3)                      
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+Complexity report per layer - macc=101,572 weights=81,640 act=10,608 ram_io=3,176
+-------------------------------------------------------------------------
+id   name       c_macc                    c_rom                     c_id
+-------------------------------------------------------------------------
+0    conv2d_0   ||||||||||||||||  79.9%   |                  0.6%   [0] 
+3    dense_3    ||||              20.0%   ||||||||||||||||  99.4%   [1] 
+4    nl_4       |                  0.1%   |                  0.0%   [2] 
+
+Generated files (5)
+-----------------------------------------------
+/home/moe/.stm32cubemx/mnist_config.h
+/home/moe/.stm32cubemx/mnist.h
+/home/moe/.stm32cubemx/mnist.c
+/home/moe/.stm32cubemx/mnist_data.h
+/home/moe/.stm32cubemx/mnist_data.c

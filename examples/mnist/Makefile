@@ -46,25 +46,25 @@ Core/Src/oled.c \
 Core/Src/model.c \
 Core/Src/stm32f4xx_it.c \
 Core/Src/stm32f4xx_hal_msp.c \
-$(PACKAGE_DIR)Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c \
-$(PACKAGE_DIR)Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
-$(PACKAGE_DIR)Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c \
-$(PACKAGE_DIR)Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c \
-$(PACKAGE_DIR)Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c \
-$(PACKAGE_DIR)Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c \
-$(PACKAGE_DIR)Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c \
-$(PACKAGE_DIR)Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c \
-$(PACKAGE_DIR)Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c \
-$(PACKAGE_DIR)Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c \
-$(PACKAGE_DIR)Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c \
-$(PACKAGE_DIR)Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c \
-$(PACKAGE_DIR)Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
-$(PACKAGE_DIR)Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c \
-$(PACKAGE_DIR)Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c \
-$(PACKAGE_DIR)Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c \
+$(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c \
+$(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
+$(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c \
+$(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c \
+$(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c \
+$(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c \
+$(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c \
+$(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c \
+$(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c \
+$(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c \
+$(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c \
+$(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c \
+$(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
+$(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c \
+$(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c \
+$(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c \
 Core/Src/system_stm32f4xx.c \
 Core/Src/spi.c \
-$(PACKAGE_DIR)Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c
+$(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c
 
 # ASM sources
 ASM_SOURCES =  \
@@ -124,10 +124,10 @@ C_INCLUDES =  \
 -ICore/Inc \
 -IMiddlewares/ST/AI/Inc \
 -IX-CUBE-AI/App \
--I$(PACKAGE_DIR)Drivers/STM32F4xx_HAL_Driver/Inc \
--I$(PACKAGE_DIR)Drivers/STM32F4xx_HAL_Driver/Inc/Legacy \
--I$(PACKAGE_DIR)Drivers/CMSIS/Device/ST/STM32F4xx/Include \
--I$(PACKAGE_DIR)Drivers/CMSIS/Include \
+-I$(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Inc \
+-I$(PACKAGE_DIR)/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy \
+-I$(PACKAGE_DIR)/Drivers/CMSIS/Device/ST/STM32F4xx/Include \
+-I$(PACKAGE_DIR)/Drivers/CMSIS/Include \
 
 
 # compile gcc flags

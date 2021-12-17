@@ -1,4 +1,5 @@
 import os
+import zlib
 import ffmpy
 import shutil
 
@@ -25,6 +26,7 @@ def split_video(video_dir):
     screen = [[0 for _ in range(width)] for _ in range(height)]
     filesize = 0
 
+    data = bytearray()
     with open('badapple.h', 'w') as f:
         f.write('uint8_t video[] = {\n')
         while True:
@@ -40,7 +42,6 @@ def split_video(video_dir):
                 interlace = 1
                 if image_id % skip == 0:
                     img = compress_image(png_dir)
-                    size = 0
                     chs = []
                     for w in range(image_id // skip % interlace, width, interlace):
                         ch = 0
@@ -50,18 +51,23 @@ def split_video(video_dir):
                                     ch |= 1 << (h // 8)
                         assert (ch < 256)
                         chs.append(ch)
+
                     for ws in range(image_id // skip % interlace, width, interlace * 8):
                         wsend = min(ws + interlace * 8, width)
                         cw = 0
+
                         for w in range(ws, wsend, interlace):
                             if chs[w // interlace] != 0:
                                 cw |= 1 << ((w - ws) // interlace)
+
                         f.write(f'{cw}, ')
-                        size += 1
+                        data.append(cw)
+
                         for w in range(ws, wsend, interlace):
                             if chs[w // interlace] != 0:
                                 f.write(f'{chs[w // interlace]}, ')
-                                size += 1
+                                data.append(chs[w // interlace])
+
                                 for h in range(0, height, 8):
                                     if (chs[w // interlace] >> (h // 8)) & 1:
                                         ret = 0
@@ -69,18 +75,21 @@ def split_video(video_dir):
                                             ret = ret * 2 + (img[h + hc][w])
                                             assert img[h + hc][w] < 2
                                         assert ret < 256
+
                                         f.write(f'{ret}, ')
-                                        size += 1
+                                        data.append(ret)
+
                                 for h in range(height):
                                     screen[h][w] = img[h][w]
                     f.write('\n')
-                    filesize += size
                 
             except EOFError:
                 break
         
         f.write('};')
-    print(f'{filesize / 1024.} KB')
+
+    print(f'{len(zlib.compress(data)) / 1024.} KB')
+    print(f'{len(data) / 1024.} KB')
 
 def compress_image(png_dir):
     png = Image.open(png_dir).resize((width, height), Image.ANTIALIAS)

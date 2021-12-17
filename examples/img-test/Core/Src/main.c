@@ -128,7 +128,7 @@ int main(void)
 								last_x = i + 21;
 								last_y = j;
 								last_chunk = chunk;
-                oled_set_position(last_x, last_y);
+                			  oled_set_position(last_x, last_y);
 							  oled_write_byte(last_chunk, OLED_DATA);
 							} 
 						}
@@ -136,7 +136,7 @@ int main(void)
 				}
 			}
 			frame++;
-			HAL_Delay(20);
+			HAL_Delay(150);
 		}
 
 		/* USER CODE END WHILE */

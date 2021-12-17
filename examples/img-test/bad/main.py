@@ -29,16 +29,17 @@ def split_video(video_dir):
     data = bytearray()
     with open('../Core/Inc/badapple.h', 'w') as f:
         f.write('uint8_t video[] = {\n')
-        while True:
+        while len(data) < 1024 * 125:
             try:
                 frame = im.tell()
-                png_dir = os.path.join(TMP_DIR, f'bad{image_id}.png')
+                png_dir = os.path.join(TMP_DIR, f'bad.png')
 
                 image_id += 1 
+                print(image_id)
                 im.save(png_dir)
                 im.seek(frame + 1)
                 
-                skip = 2
+                skip = 4
                 interlace = 1
                 if image_id % skip == 0:
                     img = compress_image(png_dir)
@@ -106,4 +107,4 @@ def transfer(video_dir):
     split_video(video_dir)
 
 if __name__ == '__main__':
-    transfer('video/bad.mp4')
+    transfer('video/badapple-24fps.mp4')

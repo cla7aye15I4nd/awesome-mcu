@@ -27,7 +27,7 @@ def split_video(video_dir):
     filesize = 0
 
     data = bytearray()
-    with open('badapple.h', 'w') as f:
+    with open('../Core/Inc/badapple.h', 'w') as f:
         f.write('uint8_t video[] = {\n')
         while True:
             try:
@@ -38,7 +38,7 @@ def split_video(video_dir):
                 im.save(png_dir)
                 im.seek(frame + 1)
                 
-                skip = 1
+                skip = 2
                 interlace = 1
                 if image_id % skip == 0:
                     img = compress_image(png_dir)
@@ -88,7 +88,6 @@ def split_video(video_dir):
         
         f.write('};')
 
-    print(f'{len(zlib.compress(data)) / 1024.} KB')
     print(f'{len(data) / 1024.} KB')
 
 def compress_image(png_dir):

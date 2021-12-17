@@ -195,6 +195,9 @@ clean:
 flash:
 	st-flash --format=ihex write build/$(TARGET).hex
 
+badapple:
+	cd bad && python3 main.py
+
 #######################################
 # dependencies
 #######################################

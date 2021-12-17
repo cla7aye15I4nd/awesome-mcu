@@ -47,7 +47,7 @@ def split_video(video_dir):
                             f.write(f'{i}, {j}, {img[i][j]}, ')
 
                 f.write('\n')
-                filesize += len(diff) * 3 + 1
+                filesize += len(diff) * 2 + 1
                 
             except EOFError:
                 break

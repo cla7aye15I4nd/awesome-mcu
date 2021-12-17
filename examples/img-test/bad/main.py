@@ -22,7 +22,7 @@ def split_video(video_dir):
 
     im = Image.open(gif_dir)
     image_id = 0
-    screen = [[0 for _ in range(width)] for _ in range(height // 8)]
+    screen = [[0 for _ in range(width)] for _ in range(height)]
     filesize = 0
 
     with open('badapple.h', 'w') as f:
@@ -36,18 +36,45 @@ def split_video(video_dir):
                 im.save(png_dir)
                 im.seek(frame + 1)
                 
-                img = compress_image(png_dir)
-                diff = []
-                f.write('    0xff, ')
-                for i in range(height // 8):
-                    for j in range(width):
-                        if screen[i][j] != img[i][j]:
-                            screen[i][j] = img[i][j]
-                            diff.append((i, j, img[i][j]))   
-                            f.write(f'{i}, {j}, {img[i][j]}, ')
-
-                f.write('\n')
-                filesize += len(diff) * 2 + 1
+                skip = 1
+                interlace = 1
+                if image_id % skip == 0:
+                    img = compress_image(png_dir)
+                    size = 0
+                    chs = []
+                    for w in range(image_id // skip % interlace, width, interlace):
+                        ch = 0
+                        for h in range(0, height, 8):
+                            for hc in range(8):
+                                if img[h + hc][w] != screen[h + hc][w]:
+                                    ch |= 1 << (h // 8)
+                        assert (ch < 256)
+                        chs.append(ch)
+                    for ws in range(image_id // skip % interlace, width, interlace * 8):
+                        wsend = min(ws + interlace * 8, width)
+                        cw = 0
+                        for w in range(ws, wsend, interlace):
+                            if chs[w // interlace] != 0:
+                                cw |= 1 << ((w - ws) // interlace)
+                        f.write(f'{cw}, ')
+                        size += 1
+                        for w in range(ws, wsend, interlace):
+                            if chs[w // interlace] != 0:
+                                f.write(f'{chs[w // interlace]}, ')
+                                size += 1
+                                for h in range(0, height, 8):
+                                    if (chs[w // interlace] >> (h // 8)) & 1:
+                                        ret = 0
+                                        for hc in range(7, -1, -1):
+                                            ret = ret * 2 + (img[h + hc][w])
+                                            assert img[h + hc][w] < 2
+                                        assert ret < 256
+                                        f.write(f'{ret}, ')
+                                        size += 1
+                                for h in range(height):
+                                    screen[h][w] = img[h][w]
+                    f.write('\n')
+                    filesize += size
                 
             except EOFError:
                 break
@@ -58,12 +85,11 @@ def split_video(video_dir):
 def compress_image(png_dir):
     png = Image.open(png_dir).resize((width, height), Image.ANTIALIAS)
 
-    img = [[0 for _ in range(width)] for _ in range(height // 8)]
+    img = [[0 for _ in range(width)] for _ in range(height)]
     for i in range(height):
         for j in range(width):
             pixel = png.getpixel((j, i))
-            if pixel > 127:
-                img[i // 8][j] |= 1 << (i % 8)
+            img[i][j] = 1 if pixel > 127 else 0
 
     return img
 

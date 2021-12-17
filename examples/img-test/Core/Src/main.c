@@ -26,6 +26,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "oled.h"
+#include "badapple.h"
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -92,23 +94,42 @@ int main(void)
   /* USER CODE BEGIN 2 */  
   
   oled_init();
+  uint8_t *video_ptr = video;
+  uint8_t *video_end = video + sizeof(video);
 
-  char uart_buffer[64];
-  char*uart_ptr = uart_buffer;
+  int last_x = -1, last_y = -1;
   /* USER CODE END 2 */
+
+  
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   { 
-    if (HAL_UART_Receive(&huart1, uart_ptr, 1, HAL_MAX_DELAY) == HAL_OK) {
-      if (*uart_ptr == '\n') {
-        *uart_ptr = '\0';
-        uart_ptr = uart_buffer;
-        oled_print(0, 0, uart_buffer);
-      } else
-        uart_ptr++;
+    while (1) {
+      video_ptr += 1;
+      if (video_ptr == video_end) {
+        video_ptr = video;
+        last_x = -1;
+        last_y = -1;
+        oled_clear();
+        break;
+      }
+      if (*video_ptr == 0xff) {
+        break;
+      }
+
+      int x = *video_ptr;
+      int y = *++video_ptr;
+      int z = *++video_ptr;
+      
+      if (!(y == last_y + 1 && x == last_x))
+        oled_set_position(y + 21, x);
+      oled_write_byte(z, OLED_DATA);
+      last_x = x;
+      last_y = y;
     }
+    HAL_Delay(30);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

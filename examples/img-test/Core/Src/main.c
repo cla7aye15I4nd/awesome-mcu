@@ -103,7 +103,7 @@ int main(void)
 	/* USER CODE END 2 */
 
 	int frame = 0;
-	const int width = 86, height = 64, interlace = 1;
+	const int width = 86, height = 64, interlace = 2;
 
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */

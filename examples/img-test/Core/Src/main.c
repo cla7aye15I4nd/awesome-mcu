@@ -144,7 +144,7 @@ int main(void)
 				}
 			}
 			frame++;
-			HAL_Delay(150);
+			HAL_Delay(100);
 		}
 
 		/* USER CODE END WHILE */

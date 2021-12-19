@@ -152,7 +152,7 @@ int main(void)
       f_read(&SDFile, &x, 1, NULL);
       
       if (x == 0xff) 
-        HAL_Delay(10);
+        HAL_Delay(15);
       else {
         f_read(&SDFile, &y, 1, NULL);
         f_read(&SDFile, &z, 1, NULL);
@@ -165,7 +165,7 @@ int main(void)
         lasty = y;
       }
     }
-    
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

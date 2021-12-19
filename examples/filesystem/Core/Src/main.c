@@ -128,7 +128,11 @@ int main(void)
     oprintf(0, 2, "[fail] badapple");
   }
 
-  HAL_Delay(1000);
+  oprintf(0, 4, "[ok] loading");
+  HAL_Delay(500);
+  oprintf(0, 6, "[ok] play start");
+  HAL_Delay(500);
+
   oled_clear();
 
   uint8_t last_x = -1, last_y = -1;

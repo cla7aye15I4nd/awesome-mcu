@@ -71,8 +71,7 @@ Core/Src/system_stm32f4xx.c \
 Middlewares/Third_Party/FatFs/src/diskio.c \
 Middlewares/Third_Party/FatFs/src/ff.c \
 Middlewares/Third_Party/FatFs/src/ff_gen_drv.c \
-Middlewares/Third_Party/FatFs/src/option/syscall.c \
-Core/Src/dma.c
+Middlewares/Third_Party/FatFs/src/option/syscall.c
 
 # ASM sources
 ASM_SOURCES =  \

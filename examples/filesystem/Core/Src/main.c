@@ -135,41 +135,37 @@ int main(void)
 
   oled_clear();
 
-  uint8_t last_x = -1, last_y = -1;
+  
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    while (1) {
-      if (f_eof(&SDFile)) {
-        oled_clear();
-        f_lseek(&SDFile, 0);
-        last_x = last_y = -1;
-
-        break;
-      }
-
+    oled_clear();
+    f_lseek(&SDFile, 0);
+    
+    uint8_t lastx = -1, lasty = -1;
+    
+    while (!f_eof(&SDFile)) {
       uint8_t x, y, z;
-
       f_read(&SDFile, &x, 1, NULL);
-      if (x == 0xff) {
-        break;
-      }
+      
+      if (x == 0xff) 
+        HAL_Delay(10);
+      else {
+        f_read(&SDFile, &y, 1, NULL);
+        f_read(&SDFile, &z, 1, NULL);
+        
+        if (!(y == lasty + 1 && x == lastx))
+          oled_set_position(y + 21, x);
+        oled_write_byte(z, OLED_DATA);
 
-      f_read(&SDFile, &y, 1, NULL);
-      f_read(&SDFile, &z, 1, NULL);
-      
-      if (!(y == last_y + 1 && x == last_x))
-        oled_set_position(y + 21, x);
-      oled_write_byte(z, OLED_DATA);
-      
-      last_x = x;
-      last_y = y;
+        lastx = x;
+        lasty = y;
+      }
     }
     
-    HAL_Delay(10);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

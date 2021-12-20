@@ -95,8 +95,6 @@ int main(void)
   MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
 
-  oled_init();
-  
   f_mount(&SDFatFS, SDPath, 1);
   
   HAL_SD_CardCIDTypeDef card_cid;
@@ -111,6 +109,7 @@ int main(void)
  
   int card_size = card_info.BlockNbr * card_info.BlockSize / 1024 / 1024;
   
+  oled_init();
   retSD = f_open(&SDFile, "test.txt", FA_OPEN_ALWAYS | FA_WRITE );
   if (retSD == FR_OK) {
     f_printf(&SDFile, "sd card size %d", card_size);

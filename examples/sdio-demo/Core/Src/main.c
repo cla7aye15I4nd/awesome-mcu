@@ -6,13 +6,13 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2022 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
   */
@@ -21,13 +21,14 @@
 #include "main.h"
 #include "fatfs.h"
 #include "sdio.h"
-#include "spi.h"
 #include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "oled.h"
+#include "retarget.h"
+#include "string.h"
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -47,7 +48,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-char oled_buf[64];
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -89,85 +90,120 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_SDIO_SD_Init();
-  MX_SPI1_Init();
   MX_USART1_UART_Init();
+  MX_SDIO_SD_Init();
   MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
 
-  f_mount(&SDFatFS, SDPath, 1);
-  
-  HAL_SD_CardCIDTypeDef card_cid;
-  HAL_SD_CardCSDTypeDef card_csd;
-  HAL_SD_CardStatusTypeDef card_status;
-  HAL_SD_CardInfoTypeDef card_info;
+  RetargetInit(&huart1);
+  printf("[INFO] Starting SDIO peripheral demo\n");
 
-  HAL_SD_GetCardCID(&hsd, &card_cid);
-  HAL_SD_GetCardCSD(&hsd, &card_csd);
-  HAL_SD_GetCardStatus(&hsd, &card_status);
-  HAL_SD_GetCardInfo(&hsd, &card_info);
- 
-  int card_size = card_info.BlockNbr * card_info.BlockSize / 1024 / 1024;
-  
-  oled_init();
-  retSD = f_open(&SDFile, "test.txt", FA_OPEN_ALWAYS | FA_WRITE );
-  if (retSD == FR_OK) {
-    if (f_printf(&SDFile, "sd card size %d", card_size) != FR_OK) {
-      oprintf(0, 0, "[fail] fatfs test");
-      Error_Handler();
-    }
-    f_close(&SDFile);
-
-    oprintf(0, 0, "[ok] fatfs test");
-  } else {
-    oprintf(0, 0, "[fail] fatfs test");
+  if (f_mount(&SDFatFS, SDPath, 1) != FR_OK) {
+    printf("[INFO] Mount fatfs Fail\n");
+    Error_Handler();
   }
-
-  retSD = f_open(&SDFile, "badapple.bin", FA_OPEN_EXISTING | FA_READ );
-  if (retSD == FR_OK) {
-    oprintf(0, 2, "[ok] badapple");
-  } else {
-    oprintf(0, 2, "[fail] badapple");
-  }
-
-  oprintf(0, 4, "[ok] loading");
-  HAL_Delay(500);
-  oprintf(0, 6, "[ok] play start");
-  HAL_Delay(500);
-
-  oled_clear();
-
+  printf("[INFO] Mount sd Success\n");
   
+  HAL_SD_CardCIDTypeDef    pCID;
+  HAL_SD_CardCSDTypeDef    pSID;
+  HAL_SD_CardStatusTypeDef pStatus;
+  HAL_SD_CardInfoTypeDef   pCardInfo;
+
+  if (HAL_SD_GetCardCID(&hsd, &pCID) != HAL_OK)
+    Error_Handler();
+
+  if (HAL_SD_GetCardCSD(&hsd, &pSID) != HAL_OK)
+    Error_Handler();
+
+  if (HAL_SD_GetCardStatus(&hsd, &pStatus) != HAL_OK)
+    Error_Handler();
+
+  if (HAL_SD_GetCardInfo(&hsd, &pCardInfo) != HAL_OK)
+    Error_Handler();
+
+  printf("[INFO[ ==== CID ====\n");
+  printf("[INFO] pCID.ManufacturerID = %d\n", pCID.ManufacturerID);
+  printf("[INFO] pCID.OEM_AppliID = %d\n", pCID.OEM_AppliID);
+  printf("[INFO] pCID.ProdName %s%s\n", (char*) &pCID.ProdName1, (char*) &pCID.ProdName2);
+  printf("[INFO] pCID.ProdRev = %d\n", pCID.ProdRev);
+  printf("[INFO] pCID.ProdSN = %ld\n", pCID.ProdSN);
+  printf("[INFO] pCID.ManufactDate = 0x%04X\n", pCID.ManufactDate);
+  printf("[INFO] pCID.CID_CRC = 0x%02X\n", pCID.CID_CRC);
+
+  printf("[INFO[ ==== SID ====\n");
+  printf("[INFO] pSID.SysSpecVersion = %d\n", pSID.SysSpecVersion);
+  printf("[INFO] pSID.CardComdClasses = %d\n", pSID.CardComdClasses);
+  printf("[INFO] pSID.DeviceSize = %ld\n", pSID.DeviceSize);
+  printf("[INFO] pSID.DeviceSizeMul = %d\n", pSID.DeviceSizeMul);
+  printf("[INFO] pSID.MaxBusClkFrec = %d\n", pSID.MaxBusClkFrec);
+  printf("[INFO] pSID.TAAC (read time) = %d\n", pSID.TAAC);
+  printf("[INFO] pSID.RdBlockLen = %d\n", pSID.RdBlockLen);
+  printf("[INFO] pSID.MaxWrBlockLen = %d\n", pSID.MaxWrBlockLen);
+  printf("[INFO] pSID.EraseGrSize = %d\n", pSID.EraseGrSize);
+  printf("[INFO] pSID.EraseGrMul = %d\n", pSID.EraseGrMul);
+  printf("[INFO] pSID.WrProtectGrSize = %d\n", pSID.EraseGrSize);
+  printf("[INFO] pSID.WrProtectGrEnable = %d\n", pSID.WrProtectGrEnable);
+
+  printf("[INFO[ ==== Status ====\n");
+  printf("[INFO] pStatus.DataBusWidth = %d\n", pStatus.DataBusWidth);
+  printf("[INFO] pStatus.SecuredMode = %d\n", pStatus.SecuredMode);
+  printf("[INFO] pStatus.CardType = %d\n", pStatus.CardType);
+  printf("[INFO] pStatus.ProtectedAreaSize = %ld\n", pStatus.ProtectedAreaSize);
+  printf("[INFO] pStatus.SpeedClass = %d\n", pStatus.SpeedClass);
+  printf("[INFO] pStatus.PerformanceMove = %d\n", pStatus.PerformanceMove);
+  printf("[INFO] pStatus.AllocationUnitSize = %d\n", pStatus.AllocationUnitSize);
+  printf("[INFO] pStatus.EraseSize = %d\n", pStatus.EraseSize);
+  printf("[INFO] pStatus.EraseTimeout = %d\n", pStatus.EraseTimeout);
+  printf("[INFO] pStatus.EraseOffset = %d\n", pStatus.EraseOffset);
+
+  printf("[INFO[ ==== CardInfo ====\n");
+  printf("[INFO] pCardInfo.CardType = %ld\n", pCardInfo.CardType);
+  printf("[INFO] pCardInfo.CardVersion = %ld\n", pCardInfo.CardVersion);
+  printf("[INFO] pCardInfo.Class = %ld\n", pCardInfo.Class);
+  printf("[INFO] pCardInfo.RelCardAdd = %ld\n", pCardInfo.RelCardAdd);
+  printf("[INFO] pCardInfo.BlockNbr = %ld\n", pCardInfo.BlockNbr);
+  printf("[INFO] pCardInfo.BlockSize = %ld\n", pCardInfo.BlockSize);
+  printf("[INFO] pCardInfo.LogBlockNbr = %ld\n", pCardInfo.LogBlockNbr);
+  printf("[INFO] pCardInfo.LogBlockSize = %ld\n", pCardInfo.LogBlockSize);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  char buff[16] = {0};
+  UINT br, bw;
+
+  if (f_open(&SDFile, "test.txt", FA_OPEN_EXISTING | FA_READ) != FR_OK)
+    Error_Handler();
+  printf("[INFO] Open file Success\n");
+
+  retSD = f_read(&SDFile, buff, 4, &br);
+  if (retSD != FR_OK) {
+    printf("[INFO] f_write return value (%d) \n", retSD);
+    Error_Handler();
+  }
+  printf("[INFO] Read file content: %s\n", buff);  
+  
+  if (f_close(&SDFile) != FR_OK)
+    Error_Handler();
+  printf("[INFO] Close file Success\n");
+
+  
+  if (f_open(&SDFile, "test.bak", FA_WRITE | FA_CREATE_ALWAYS) != FR_OK) {
+    Error_Handler();
+  }
+  printf("[INFO] Create file Success\n");
+
+  if (f_write(&SDFile, buff, 4, &bw) != FR_OK)
+    Error_Handler();
+  printf("[INFO] Write file Success\n");
+
+  if (f_close(&SDFile) != FR_OK)
+    Error_Handler();
+  printf("[INFO] STM32 SDIO DEMO END\n");
+  
   while (1)
   {
-    oled_clear();
-    f_lseek(&SDFile, 0);
-    
-    uint8_t lastx = -1, lasty = -1;
-    
-    while (!f_eof(&SDFile)) {
-      uint8_t x, y, z;
-      f_read(&SDFile, &x, 1, NULL);
-      
-      if (x == 0xff) 
-        HAL_Delay(30);
-      else {
-        f_read(&SDFile, &y, 1, NULL);
-        f_read(&SDFile, &z, 1, NULL);
-        
-        if (!(y == lasty + 1 && x == lastx))
-          oled_set_position(y + 21, x);
-        oled_write_byte(z, OLED_DATA);
-
-        lastx = x;
-        lasty = y;
-      }
-    }
-
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -199,7 +235,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLM = 8;
   RCC_OscInitStruct.PLL.PLLN = 50;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-  RCC_OscInitStruct.PLL.PLLQ = 3;
+  RCC_OscInitStruct.PLL.PLLQ = 4;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();

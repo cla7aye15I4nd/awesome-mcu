@@ -55,10 +55,13 @@ class STM32Parser:
             if line == 'typedef enum':
                 i += 2
                 
-                while board.lines[i].strip()[0] != '}':
+                while True:
                     line = board.lines[i].strip()
+                    if line and line[0] == '}':
+                        break
+
                     line, _ = split_comment(line)
-                    if len(line.strip()) > 0:
+                    if '=' in line:
                         name, irq = line.strip(', ').split('=')
                         name = name.strip()
                         board.context[name] = eval(irq)                        
@@ -82,8 +85,10 @@ class STM32Parser:
                 i += 2 # skip 'typedef struct\n{'
 
                 struct = Struct()
-                while board.lines[i].strip()[0] != '}':
+                while True:
                     line = board.lines[i].strip()
+                    if line and line[0] == '}':
+                        break
                     
                     comment = ''
                     if '/*' in line:
@@ -96,16 +101,19 @@ class STM32Parser:
 
                         comment = comment.strip('*!</ ')
 
-                    line = lcutstrip(lcutstrip(line, '__IO'), 'const')
-                    typename, varname = line.split()
+                    line = lcutstrip(lcutstrip(lcutstrip(line, '__IO'), '__I'), 'const')
                     
-                    typename = self.gettypename(typename)
-                    varname = varname.strip().strip(';')
-                    if ']' == varname[-1]:
-                        varname, number = varname[:-1].split('[')
-                        typename = typename + f' * {eval(number)}'
+                    if len(line.strip()) > 0:    
+                        print(line)
+                        typename, varname = line.split()
+                        
+                        typename = self.gettypename(typename)
+                        varname = varname.strip().strip(';')
+                        if ']' == varname[-1]:
+                            varname, number = varname[:-1].split('[')
+                            typename = typename + f' * {eval(number)}'
 
-                    struct.add_variable((typename, varname, comment))
+                        struct.add_variable((typename, varname, comment))
                     
                     i += 1
 

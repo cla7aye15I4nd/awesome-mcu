@@ -1,6 +1,7 @@
 import re
 
-path = '../../packages/STM32F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h'
+# path = '../../../packages/STM32F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h'
+path = '../../../packages/STM32F1/Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h'
 
 with open(path) as f:
     code = f.read()
@@ -69,4 +70,4 @@ def getall(tag):
                 pass    
 
 print('from enum import IntEnum\n\n')
-getall('RTC')
+getall('DMA')

@@ -30,7 +30,7 @@ OPT = -Og
 #######################################
 # Build path
 BUILD_DIR = build
-PACKAGE_DIR = ../../packages/STM32F4
+PACKAGE_DIR = ../../packages/STM32F1
 
 ######################################
 # source

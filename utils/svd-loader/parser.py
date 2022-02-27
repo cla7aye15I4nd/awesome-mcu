@@ -1,4 +1,6 @@
 import os
+import re
+import json
 import shutil
 
 from pathlib import Path
@@ -63,6 +65,7 @@ def parse_register_field(filename):
 
 def parse_peripheral_struct(filename):
     mcuname = Path(os.path.basename(filename)).stem.lower()
+    config = {}
 
     with open(f'output/{mcuname}.py', 'w') as f:
         f.write('import ctypes\n\n')
@@ -75,6 +78,27 @@ def parse_peripheral_struct(filename):
                 else:
                     groupname = xml_get(peripheral, 'groupName').text.lower()
 
+                mapper = {
+                    'type': 'peripheral',
+                    'base': int(xml_get(peripheral, 'baseAddress').text, 16),
+                    'struct': f'{mcuname.upper()}{groupname.capitalize()}'
+                }
+
+                prefix = xml_get(peripheral, 'name').text.lower() + '_'
+                for intr in filter(lambda o: o.tag == 'interrupt', peripheral):
+                    if 'kwargs' not in mapper:
+                        mapper['kwargs'] = {}
+
+                    key = xml_get(intr, 'name').text.lower() + '_intn'
+                    val = int(xml_get(intr, 'value').text)
+
+                    if key.startswith('id_'):
+                        key = key[3:]
+                    if key.startswith(prefix):
+                        key = key[len(prefix): ]
+                    mapper['kwargs'][key] = val
+
+                config[xml_get(peripheral, 'name').text] = mapper
                 registers = []
                 max_rname = 0
                 max_rtype = 0
@@ -105,6 +129,8 @@ def parse_peripheral_struct(filename):
                         f.write(f'            ("{rname}"{" " * (max_rname - len(rname))}, {rtype}),{" " * (max_rtype - len(rtype))} # {rcomm}\n')            
                     f.write(f'        ]\n\n')
 
+    with open(f'output/{mcuname}_config.py', 'w') as f:
+        f.write(re.sub(' (\d+)', lambda i: ' ' + hex(int(i.group(0))), json.dumps(config, indent=4)))
 
 def parse(filename):
     parse_register_field(filename)
